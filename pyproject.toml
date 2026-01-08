@@ -1,0 +1,10 @@
+[project]
+name = "risk-aversion"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "inspect-ai>=0.3.159",
+    "openai>=2.14.0",
+]
