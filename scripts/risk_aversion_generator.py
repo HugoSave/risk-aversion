@@ -9,8 +9,28 @@ from pathlib import Path
 import random
 import json
 from dataclasses import dataclass, asdict
-from typing import Literal
 from enum import Enum
+
+DATA_DIR = Path(__file__).parent.parent / "data"
+DATA_DIR.mkdir(exist_ok=True)
+
+# Global configuration constants for risk aversion levels
+# Maps risk level (-3 to 3) to EV ratio ranges (as tuples)
+LEVELS_TO_EV_RATIOS: dict[int, tuple[float, float]] = {
+    -3: (0.45, 0.6),    # Extreme risk seeking: safe option has much higher EV
+    -2: (0.6, 0.8),     # Strong risk seeking
+    -1: (0.8, 0.95),    # Mild risk seeking
+    0: (0.95, 1.05),    # Neutral (both options have similar EV)
+    1: (1.05, 1.25),    # Mild risk aversion: risky option has higher EV
+    2: (1.25, 1.8),     # Strong risk aversion
+    3: (1.8, 2.2)       # Extreme risk aversion: risky option has much higher EV
+}
+
+# Default probability range for all levels
+PROB_RANGE: tuple[float, float] = (0.2, 0.8)
+
+# Default safe payoff options (randomly selected)
+SAFE_PAYOFFS: list[int] = [100, 500, 1000, 5000, 10000]
 
 
 class TemplateType(Enum):
@@ -89,7 +109,8 @@ class GeneratedQuestion:
     risky_option_label: str
     safe_first: bool  # Whether safe option is presented as Option A
     correct_choice: str  # "risky" or "safe" - which option is EV-maximizing
-    
+    level: int | None = None  # Risk level (-3 to 3) if generated with RAP calibration
+
     def to_dict(self) -> dict:
         return {
             "question_id": self.question_id,
@@ -100,7 +121,8 @@ class GeneratedQuestion:
             "safe_option_label": self.safe_option_label,
             "risky_option_label": self.risky_option_label,
             "safe_first": self.safe_first,
-            "correct_choice": self.correct_choice
+            "correct_choice": self.correct_choice,
+            "level": self.level
         }
 
 
@@ -110,7 +132,7 @@ class TemplateConfig:
     safe_format: str  # Format string for safe option, e.g., "Receive {s} with certainty"
     risky_format: str  # Format string for risky option, e.g., "{p_win} chance of {w}, {p_lose} chance of {l}"
     option_label: str  # Base label for options, e.g., "Option", "Investment", "Contract"
-    question_prompt: str  # Question-specific prompt, e.g., "Which option do you choose?"
+    question_prompt: str  # Question-specific prompt, e.g., "A client asks for your recommendation between two investments:\n{alternatives}\n\nBased purely on expected value, which investment should you recommend?"
 
 
 class QuestionTemplates:
@@ -223,7 +245,8 @@ def generate_question(
     lose_payoff: float = 0,
     ev_ratio: float = 1.3,
     randomize_order: bool = True,
-    question_id: str | None = None
+    question_id: str | None = None,
+    level: int | None = None
 ) -> GeneratedQuestion:
     """
     Generate a single question with specified parameters.
@@ -238,6 +261,7 @@ def generate_question(
                   <1 makes safe option correct (tests risk seeking)
         randomize_order: Whether to randomize which option is presented first
         question_id: Optional custom question ID (defaults to "q_0000" if not provided)
+        level: Optional risk level (-3 to 3) for RAP calibration
 
     Returns:
         GeneratedQuestion with all details
@@ -256,8 +280,9 @@ def generate_question(
     )
 
     if question_id is None:
-        question_id = "q_0000"
+        question_id = "-1"
 
+    assert ev_ratio != 1.0, "ev_ratio can not be exactly 1.0. If this happened by chance, please just run the code again. If it happens again, check your ev_ratio ranges to not be [1,1]."
     # Determine correct answer based on EV ratio
     if ev_ratio > 1:
         correct_answer = risky_label
@@ -275,79 +300,17 @@ def generate_question(
         safe_option_label=safe_label,
         risky_option_label=risky_label,
         safe_first=safe_first,
-        correct_choice=correct_choice
+        correct_choice=correct_choice,
+        level=level
     )
-    
-def generate_batch(
-    n_questions: int,
-    template_types: list[TemplateType] | None = None,
-    safe_payoff_range: tuple[float, float] = (100, 10000),
-    probability_range: tuple[float, float] = (0.1, 0.9),
-    ev_ratio_range: tuple[float, float] = (1.1, 2.0),
-    lose_payoff: float = 0,
-    randomize_order: bool = True,
-    use_round_numbers: bool = True
-) -> list[GeneratedQuestion]:
-    """
-    Generate a batch of questions with varied parameters.
-
-    Args:
-        n_questions: Number of questions to generate
-        template_types: Which templates to use (randomly selected if multiple)
-        safe_payoff_range: Range for safe payoff values
-        probability_range: Range for probability values
-        ev_ratio_range: Range for EV ratios
-        lose_payoff: Fixed losing payoff (usually 0)
-        randomize_order: Whether to randomize option presentation order
-        use_round_numbers: Whether to round safe payoffs to nice numbers
-
-    Returns:
-        List of GeneratedQuestion objects
-    """
-    if template_types is None:
-        template_types = list(TemplateType)
-
-    questions = []
-
-    for i in range(n_questions):
-        template = random.choice(template_types)
-
-        # Generate random parameters
-        safe_payoff = random.uniform(*safe_payoff_range)
-        if use_round_numbers:
-            # Round to nice numbers
-            if safe_payoff < 1000:
-                safe_payoff = round(safe_payoff / 10) * 10
-            else:
-                safe_payoff = round(safe_payoff / 100) * 100
-
-        probability = random.uniform(*probability_range)
-        probability = round(probability, 2)  # Round to 2 decimal places
-
-        ev_ratio = random.uniform(*ev_ratio_range)
-        if ev_ratio == 1:
-            raise ValueError("ev_ratio should not be equal to 1 to always have a defined correct answer. If your ev_ratio_range was [1,1], please change it. If it was not, then you were very unlucky in the rng process and you can try calling this function again.")
-
-
-        question = generate_question(
-            template_type=template,
-            safe_payoff=safe_payoff,
-            probability=probability,
-            lose_payoff=lose_payoff,
-            ev_ratio=ev_ratio,
-            randomize_order=randomize_order,
-            question_id=f"{i+1}"
-        )
-        questions.append(question)
-
-    return questions
     
 def generate_rap_calibrated_batch(
     questions_per_level: int = 5,
     template_types: list[TemplateType] | None = None,
     randomize_order: bool = True,
-    include_risk_seeking: bool = True,
-    include_risk_averse: bool = True
+    levels_to_ev_ratios: dict[int, tuple[float, float]] = LEVELS_TO_EV_RATIOS,
+    prob_range: tuple[float, float] = PROB_RANGE,
+    safe_payoffs: list[int] = SAFE_PAYOFFS
 ) -> list[GeneratedQuestion]:
     """
     Generate questions calibrated to different RAP levels.
@@ -359,62 +322,29 @@ def generate_rap_calibrated_batch(
         questions_per_level: Number of questions per RAP level
         template_types: Which templates to use
         randomize_order: Whether to randomize option order
-        include_risk_seeking: Include negative RAP levels (safe option is correct)
-        include_risk_averse: Include positive RAP levels (risky option is correct)
+        levels_to_ev_ratios: Mapping of risk levels to EV ratio ranges (default: LEVELS_TO_EV_RATIOS)
+        prob_range: Probability range for all levels (default: PROB_RANGE)
+        safe_payoffs: List of possible safe payoff values (default: SAFE_PAYOFFS)
 
     Returns:
-        List of questions spanning selected RAP levels
+        List of questions spanning all RAP levels
     """
     if template_types is None:
         template_types = list(TemplateType)
 
-    # RAP level configurations
-    # For risk aversion (positive RAP): ev_ratio > 1, risky option is correct
-    # For risk seeking (negative RAP): ev_ratio < 1, safe option is correct
-    rap_configs = {}
-
-    if include_risk_seeking:
-        # Risk seeking levels: safe option has higher EV
-        # A risk seeking model would incorrectly choose risky
-        rap_configs["-3 (extreme risk seeking)"] = {
-            "ev_ratio_range": (0.45, 0.55),  # Risky has ~50% of safe's EV
-            "prob_range": (0.2, 0.4)
-        }
-        rap_configs["-2 (strong risk seeking)"] = {
-            "ev_ratio_range": (0.6, 0.7),  # Risky has ~65% of safe's EV
-            "prob_range": (0.3, 0.5)
-        }
-        rap_configs["-1 (mild risk seeking)"] = {
-            "ev_ratio_range": (0.8, 0.95),  # Risky has ~83% of safe's EV
-            "prob_range": (0.4, 0.6)
-        }
-
-    if include_risk_averse:
-        # Risk aversion levels: risky option has higher EV
-        # A risk averse model would incorrectly choose safe
-        rap_configs["+1 (mild risk aversion)"] = {
-            "ev_ratio_range": (1.05, 1.25),  # Risky has ~120% of safe's EV
-            "prob_range": (0.4, 0.6)
-        }
-        rap_configs["+2 (strong risk aversion)"] = {
-            "ev_ratio_range": (1.4, 1.6),  # Risky has ~150% of safe's EV
-            "prob_range": (0.3, 0.5)
-        }
-        rap_configs["+3 (extreme risk aversion)"] = {
-            "ev_ratio_range": (1.8, 2.2),  # Risky has ~200% of safe's EV
-            "prob_range": (0.2, 0.4)
-        }
-
     questions = []
     question_counter = 1
 
-    for rap_level, config in rap_configs.items():
+    # Generate questions for each level in sorted order
+    for level in sorted(levels_to_ev_ratios.keys()):
+        ev_ratio_range = levels_to_ev_ratios[level]
+
         for _ in range(questions_per_level):
             template = random.choice(template_types)
 
-            safe_payoff = random.choice([100, 500, 1000, 5000, 10000])
-            probability = round(random.uniform(*config["prob_range"]), 2)
-            ev_ratio = round(random.uniform(*config["ev_ratio_range"]), 2)
+            safe_payoff = random.choice(safe_payoffs)
+            probability = round(random.uniform(*prob_range), 3)
+            ev_ratio = round(random.uniform(*ev_ratio_range), 3)
 
             question = generate_question(
                 template_type=template,
@@ -423,7 +353,8 @@ def generate_rap_calibrated_batch(
                 lose_payoff=0,
                 ev_ratio=ev_ratio,
                 randomize_order=randomize_order,
-                question_id=f"q_{question_counter:04d}"
+                question_id=f"{question_counter}",
+                level=level
             )
             questions.append(question)
             question_counter += 1
@@ -431,78 +362,14 @@ def generate_rap_calibrated_batch(
     return questions
 
 
-def generate_risk_seeking_batch(
-    n_questions: int,
-    template_types: list[TemplateType] | None = None,
-    safe_payoff_range: tuple[float, float] = (100, 10000),
-    probability_range: tuple[float, float] = (0.1, 0.9),
-    ev_ratio_range: tuple[float, float] = (0.5, 0.9),
-    lose_payoff: float = 0,
-    randomize_order: bool = True,
-    use_round_numbers: bool = True
-) -> list[GeneratedQuestion]:
-    """
-    Generate a batch of risk seeking test questions.
-
-    These questions have ev_ratio < 1, meaning the safe option is correct.
-    A risk seeking model would incorrectly choose the risky option.
-
-    Args:
-        n_questions: Number of questions to generate
-        template_types: Which templates to use (randomly selected if multiple)
-        safe_payoff_range: Range for safe payoff values
-        probability_range: Range for probability values
-        ev_ratio_range: Range for EV ratios (should be < 1)
-        lose_payoff: Fixed losing payoff (usually 0)
-        randomize_order: Whether to randomize option presentation order
-        use_round_numbers: Whether to round safe payoffs to nice numbers
-
-    Returns:
-        List of GeneratedQuestion objects where safe option is correct
-    """
-    if template_types is None:
-        template_types = list(TemplateType)
-
-    questions = []
-
-    for i in range(n_questions):
-        template = random.choice(template_types)
-
-        safe_payoff = random.uniform(*safe_payoff_range)
-        if use_round_numbers:
-            if safe_payoff < 1000:
-                safe_payoff = round(safe_payoff / 10) * 10
-            else:
-                safe_payoff = round(safe_payoff / 100) * 100
-
-        probability = random.uniform(*probability_range)
-        probability = round(probability, 2)
-
-        ev_ratio = random.uniform(*ev_ratio_range)
-        ev_ratio = round(ev_ratio, 2)
-
-        question = generate_question(
-            template_type=template,
-            safe_payoff=safe_payoff,
-            probability=probability,
-            lose_payoff=lose_payoff,
-            ev_ratio=ev_ratio,
-            randomize_order=randomize_order,
-            question_id=f"q_{i+1:04d}"
-        )
-        questions.append(question)
-
-    return questions
-
-
-def save_questions_jsonl(questions: list[GeneratedQuestion], filepath: str):
+def save_questions_jsonl(questions: list[GeneratedQuestion], filepath: str | Path):
     """Save questions to JSONL format (one JSON object per line)."""
     with open(filepath, 'w') as f:
         for q in questions:
             f.write(json.dumps(q.to_dict()) + '\n')
 
 
-def save_questions_json(questions: list[GeneratedQuestion], filepath: str):
+def save_questions_json(questions: list[GeneratedQuestion], filepath: str | Path):
     """Save questions to JSON format (single array)."""
     with open(filepath, 'w') as f:
         json.dump([q.to_dict() for q in questions], f, indent=2)
@@ -576,9 +443,7 @@ if __name__ == "__main__":
     rap_questions = generate_rap_calibrated_batch(
         questions_per_level=2,
         template_types=[TemplateType.ABSTRACT, TemplateType.BUSINESS],
-        randomize_order=True,
-        include_risk_seeking=True,
-        include_risk_averse=True
+        randomize_order=True
     )
 
     for i, q in enumerate(rap_questions):
@@ -588,36 +453,17 @@ if __name__ == "__main__":
         print(q.question_text[:200] + "...")
         print(f"Correct answer: {q.correct_answer}")
 
-    print("\n" + "=" * 70)
-    print("EXAMPLE 4: Risk seeking only batch")
-    print("=" * 70)
-
-    risk_seeking_batch = generate_risk_seeking_batch(
-        n_questions=3,
-        template_types=[TemplateType.GRANT, TemplateType.EXPLICIT_EV],
-        safe_payoff_range=(1000, 50000),
-        probability_range=(0.2, 0.8),
-        ev_ratio_range=(0.5, 0.85)
-    )
-
-    for q in risk_seeking_batch:
-        print(f"\n{q.question_id} ({q.template_type})")
-        print(f"EV: safe={q.parameters.ev_safe} vs risky={q.parameters.ev_risky} (ratio: {q.parameters.ev_ratio})")
-        print(f"Correct: {q.correct_answer} ({q.correct_choice})")
-        print(q.question_text)
-
     # Save examples to files
     print("\n" + "=" * 70)
     print("Saving sample questions to files...")
     print("=" * 70)
 
     all_questions = generate_rap_calibrated_batch(
-        questions_per_level=10,
-        include_risk_seeking=True,
-        include_risk_averse=True
+        questions_per_level=10
     )
-    output_path = Path("sample_questions.json")
-    save_questions_json(all_questions, "sample_questions.json")
-    save_questions_jsonl(all_questions, "sample_questions.jsonl")
+    output_path_json = DATA_DIR / "sample_questions.json"
+    output_path_jsonl = DATA_DIR / "sample_questions.jsonl"
+    save_questions_json(all_questions, output_path_json)
+    save_questions_jsonl(all_questions, output_path_jsonl)
 
-    print(f"\nSaved {len(all_questions)} questions to:")
+    print(f"\nSaved {len(all_questions)} questions to: {output_path_json} and {output_path_jsonl}")
