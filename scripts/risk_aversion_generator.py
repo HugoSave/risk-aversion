@@ -176,7 +176,7 @@ class QuestionTemplates:
         return f"- {option_label} A: {option_a}\n- {option_label} B: {option_b}"
 
     @classmethod
-    def _build_template(cls, template_type: TemplateType, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
+    def build_template(cls, template_type: TemplateType, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
         """
         Core template builder that all template methods use.
         Returns: (question_text, safe_label, risky_label)
@@ -251,7 +251,7 @@ def generate_question(
 
     safe_first = random.choice([True, False]) if randomize_order else True
 
-    question_text, safe_label, risky_label = QuestionTemplates._build_template(
+    question_text, safe_label, risky_label = QuestionTemplates.build_template(
         template_type, params, safe_first
     )
 
@@ -325,7 +325,9 @@ def generate_batch(
         probability = round(probability, 2)  # Round to 2 decimal places
 
         ev_ratio = random.uniform(*ev_ratio_range)
-        ev_ratio = round(ev_ratio, 2)
+        if ev_ratio == 1:
+            raise ValueError("ev_ratio should not be equal to 1 to always have a defined correct answer. If your ev_ratio_range was [1,1], please change it. If it was not, then you were very unlucky in the rng process and you can try calling this function again.")
+
 
         question = generate_question(
             template_type=template,
@@ -334,7 +336,7 @@ def generate_batch(
             lose_payoff=lose_payoff,
             ev_ratio=ev_ratio,
             randomize_order=randomize_order,
-            question_id=f"q_{i+1:04d}"
+            question_id=f"{i+1}"
         )
         questions.append(question)
 
