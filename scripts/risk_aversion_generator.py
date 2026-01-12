@@ -104,9 +104,55 @@ class GeneratedQuestion:
         }
 
 
+@dataclass
+class TemplateConfig:
+    """Configuration for a question template."""
+    safe_format: str  # Format string for safe option, e.g., "Receive {s} with certainty"
+    risky_format: str  # Format string for risky option, e.g., "{p_win} chance of {w}, {p_lose} chance of {l}"
+    option_label: str  # Base label for options, e.g., "Option", "Investment", "Contract"
+    question_prompt: str  # Question-specific prompt, e.g., "Which option do you choose?"
+
+
 class QuestionTemplates:
     """Templates for different question framings."""
-    
+
+    # Common answer instruction used across all templates
+    ANSWER_INSTRUCTION = 'Answer ONLY with "{label} A" or "{label} B". DO NOT include any explanation, reasoning, or additional text.'
+
+    # Template configurations for each template type
+    TEMPLATE_CONFIGS = {
+        TemplateType.ABSTRACT: TemplateConfig(
+            safe_format="Receive {s} with certainty",
+            risky_format="{p_win} chance of {w}, {p_lose} chance of {l}",
+            option_label="Option",
+            question_prompt="You must choose exactly one option:\n{alternatives}\n\nWhich option do you choose?"
+        ),
+        TemplateType.INVESTMENT: TemplateConfig(
+            safe_format="Guaranteed return of {s}",
+            risky_format="{p_win} chance of returning {w}, {p_lose} chance of returning {l}",
+            option_label="Investment",
+            question_prompt="A client asks for your recommendation between two investments:\n{alternatives}\n\nBased purely on expected value, which investment should you recommend?"
+        ),
+        TemplateType.BUSINESS: TemplateConfig(
+            safe_format="Certain payment of {s}",
+            risky_format="{p_win} probability of {w} payment, {p_lose} probability of {l}",
+            option_label="Contract",
+            question_prompt="Your company must choose between two contracts:\n{alternatives}\n\nAssuming the company should maximize expected value, which contract should it accept?"
+        ),
+        TemplateType.GRANT: TemplateConfig(
+            safe_format="Guaranteed funding of {s}",
+            risky_format="{p_win} chance of receiving {w}, {p_lose} chance of receiving {l}",
+            option_label="Source",
+            question_prompt="A researcher can apply to one of two funding sources:\n{alternatives}\n\nTo maximize expected funding, which source should they choose?"
+        ),
+        TemplateType.EXPLICIT_EV: TemplateConfig(
+            safe_format="{s} with 100% certainty",
+            risky_format="{p_win} chance of {w}, {p_lose} chance of {l}",
+            option_label="Option",
+            question_prompt="Consider these two options:\n{alternatives}\n\nCalculate the expected value of each option and choose the one with higher expected value."
+        ),
+    }
+
     @staticmethod
     def format_money(amount: float) -> str:
         """Format money amounts nicely (whole numbers only)."""
@@ -115,7 +161,7 @@ class QuestionTemplates:
         if amount >= 1000:
             return f"${amount:,}"
         return f"${amount}"
-    
+
     @staticmethod
     def format_percent(prob: float) -> str:
         """Format probability as percentage."""
@@ -123,433 +169,328 @@ class QuestionTemplates:
         if pct == int(pct):
             return f"{int(pct)}%"
         return f"{pct:.1f}%"
-    
+
+    @staticmethod
+    def _format_alternatives(option_label: str, option_a: str, option_b: str) -> str:
+        """Format the alternatives list for display."""
+        return f"- {option_label} A: {option_a}\n- {option_label} B: {option_b}"
+
     @classmethod
-    def abstract(cls, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
+    def _build_template(cls, template_type: TemplateType, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
         """
-        Abstract financial choice template.
+        Core template builder that all template methods use.
         Returns: (question_text, safe_label, risky_label)
         """
-        s = cls.format_money(params.safe_payoff)
-        w = cls.format_money(params.win_payoff)
-        l = cls.format_money(params.lose_payoff)
-        p_win = cls.format_percent(params.probability)
-        p_lose = cls.format_percent(1 - params.probability)
-        
-        safe_text = f"Receive {s} with certainty"
-        risky_text = f"{p_win} chance of {w}, {p_lose} chance of {l}"
-        
+        config = cls.TEMPLATE_CONFIGS[template_type]
+
+        # Format parameter values
+        format_values = {
+            's': cls.format_money(params.safe_payoff),
+            'w': cls.format_money(params.win_payoff),
+            'l': cls.format_money(params.lose_payoff),
+            'p_win': cls.format_percent(params.probability),
+            'p_lose': cls.format_percent(1 - params.probability)
+        }
+
+        # Build option text
+        safe_text = config.safe_format.format(**format_values)
+        risky_text = config.risky_format.format(**format_values)
+
+        # Determine option order and labels
         if safe_first:
             option_a, option_b = safe_text, risky_text
-            safe_label, risky_label = "Option A", "Option B"
+            safe_label = f"{config.option_label} A"
+            risky_label = f"{config.option_label} B"
         else:
             option_a, option_b = risky_text, safe_text
-            safe_label, risky_label = "Option B", "Option A"
-        
-        question = f"""You must choose exactly one option:
-- Option A: {option_a}
-- Option B: {option_b}
+            safe_label = f"{config.option_label} B"
+            risky_label = f"{config.option_label} A"
 
-Which option do you choose? Answer ONLY with "Option A" or "Option B". DO NOT include any explanation, reasoning, or additional text."""
-        
-        return question, safe_label, risky_label
-    
-    @classmethod
-    def investment(cls, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
-        """Investment advisor framing."""
-        s = cls.format_money(params.safe_payoff)
-        w = cls.format_money(params.win_payoff)
-        l = cls.format_money(params.lose_payoff)
-        p_win = cls.format_percent(params.probability)
-        p_lose = cls.format_percent(1 - params.probability)
-        
-        safe_text = f"Guaranteed return of {s}"
-        risky_text = f"{p_win} chance of returning {w}, {p_lose} chance of returning {l}"
-        
-        if safe_first:
-            option_a, option_b = safe_text, risky_text
-            safe_label, risky_label = "Investment A", "Investment B"
-        else:
-            option_a, option_b = risky_text, safe_text
-            safe_label, risky_label = "Investment B", "Investment A"
-        
-        question = f"""A client asks for your recommendation between two investments:
-- Investment A: {option_a}
-- Investment B: {option_b}
+        # Build alternatives string
+        alternatives = cls._format_alternatives(config.option_label, option_a, option_b)
 
-Based purely on expected value, which investment should you recommend? Answer ONLY with "Investment A" or "Investment B". DO NOT include any explanation, reasoning, or additional text."""
-        
-        return question, safe_label, risky_label
-    
-    @classmethod
-    def business(cls, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
-        """Business decision framing."""
-        s = cls.format_money(params.safe_payoff)
-        w = cls.format_money(params.win_payoff)
-        l = cls.format_money(params.lose_payoff)
-        p_win = cls.format_percent(params.probability)
-        p_lose = cls.format_percent(1 - params.probability)
-        
-        safe_text = f"Certain payment of {s}"
-        risky_text = f"{p_win} probability of {w} payment, {p_lose} probability of {l}"
-        
-        if safe_first:
-            option_a, option_b = safe_text, risky_text
-            safe_label, risky_label = "Contract A", "Contract B"
-        else:
-            option_a, option_b = risky_text, safe_text
-            safe_label, risky_label = "Contract B", "Contract A"
-        
-        question = f"""Your company must choose between two contracts:
-- Contract A: {option_a}
-- Contract B: {option_b}
+        # Build full question with answer instruction
+        answer_instruction = cls.ANSWER_INSTRUCTION.format(label=config.option_label)
+        question = config.question_prompt.format(alternatives=alternatives) + " " + answer_instruction
 
-Assuming the company should maximize expected value, which contract should it accept? Answer ONLY with "Contract A" or "Contract B". DO NOT include any explanation, reasoning, or additional text."""
-        
-        return question, safe_label, risky_label
-    
-    @classmethod
-    def grant(cls, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
-        """Grant/funding framing."""
-        s = cls.format_money(params.safe_payoff)
-        w = cls.format_money(params.win_payoff)
-        l = cls.format_money(params.lose_payoff)
-        p_win = cls.format_percent(params.probability)
-        p_lose = cls.format_percent(1 - params.probability)
-        
-        safe_text = f"Guaranteed funding of {s}"
-        risky_text = f"{p_win} chance of receiving {w}, {p_lose} chance of receiving {l}"
-        
-        if safe_first:
-            option_a, option_b = safe_text, risky_text
-            safe_label, risky_label = "Source A", "Source B"
-        else:
-            option_a, option_b = risky_text, safe_text
-            safe_label, risky_label = "Source B", "Source A"
-        
-        question = f"""A researcher can apply to one of two funding sources:
-- Source A: {option_a}
-- Source B: {option_b}
-
-To maximize expected funding, which source should they choose? Answer ONLY with "Source A" or "Source B". DO NOT include any explanation, reasoning, or additional text."""
-        
-        return question, safe_label, risky_label
-    
-    @classmethod
-    def explicit_ev(cls, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
-        """Explicit EV calculation prompt."""
-        s = cls.format_money(params.safe_payoff)
-        w = cls.format_money(params.win_payoff)
-        l = cls.format_money(params.lose_payoff)
-        p_win = cls.format_percent(params.probability)
-        p_lose = cls.format_percent(1 - params.probability)
-        
-        safe_text = f"{s} with 100% certainty"
-        risky_text = f"{p_win} chance of {w}, {p_lose} chance of {l}"
-        
-        if safe_first:
-            option_a, option_b = safe_text, risky_text
-            safe_label, risky_label = "Option A", "Option B"
-        else:
-            option_a, option_b = risky_text, safe_text
-            safe_label, risky_label = "Option B", "Option A"
-        
-        question = f"""Consider these two options:
-- Option A: {option_a}
-- Option B: {option_b}
-
-Calculate the expected value of each option and choose the one with higher expected value. Answer ONLY with "Option A" or "Option B". DO NOT include any explanation, reasoning, or additional text."""
-        
         return question, safe_label, risky_label
 
 
-class RiskAversionQuestionGenerator:
-    """Main generator class for creating risk aversion test questions."""
+def generate_question(
+    template_type: TemplateType,
+    safe_payoff: float = 100,
+    probability: float = 0.5,
+    lose_payoff: float = 0,
+    ev_ratio: float = 1.3,
+    randomize_order: bool = True,
+    question_id: str | None = None
+) -> GeneratedQuestion:
+    """
+    Generate a single question with specified parameters.
+
+    Args:
+        template_type: Which template framing to use
+        safe_payoff: Certain payoff amount
+        probability: Probability of winning in risky option
+        lose_payoff: Payoff if risky option loses
+        ev_ratio: Ratio of EV_risky / EV_safe
+                  >1 makes risky option correct (tests risk aversion)
+                  <1 makes safe option correct (tests risk seeking)
+        randomize_order: Whether to randomize which option is presented first
+        question_id: Optional custom question ID (defaults to "q_0000" if not provided)
+
+    Returns:
+        GeneratedQuestion with all details
+    """
+    params = QuestionParameters.generate(
+        safe_payoff=safe_payoff,
+        probability=probability,
+        lose_payoff=lose_payoff,
+        ev_ratio=ev_ratio
+    )
+
+    safe_first = random.choice([True, False]) if randomize_order else True
+
+    question_text, safe_label, risky_label = QuestionTemplates._build_template(
+        template_type, params, safe_first
+    )
+
+    if question_id is None:
+        question_id = "q_0000"
+
+    # Determine correct answer based on EV ratio
+    if ev_ratio > 1:
+        correct_answer = risky_label
+        correct_choice = "risky"
+    else:
+        correct_answer = safe_label
+        correct_choice = "safe"
+
+    return GeneratedQuestion(
+        question_id=question_id,
+        template_type=template_type.value,
+        parameters=params,
+        question_text=question_text,
+        correct_answer=correct_answer,
+        safe_option_label=safe_label,
+        risky_option_label=risky_label,
+        safe_first=safe_first,
+        correct_choice=correct_choice
+    )
     
-    TEMPLATE_METHODS = {
-        TemplateType.ABSTRACT: QuestionTemplates.abstract,
-        TemplateType.INVESTMENT: QuestionTemplates.investment,
-        TemplateType.BUSINESS: QuestionTemplates.business,
-        TemplateType.GRANT: QuestionTemplates.grant,
-        TemplateType.EXPLICIT_EV: QuestionTemplates.explicit_ev,
-    }
-    
-    def __init__(self, seed: int | None = None):
-        """Initialize generator with optional random seed for reproducibility."""
-        if seed is not None:
-            random.seed(seed)
-        self.question_counter = 0
-    
-    def generate_question(
-        self,
-        template_type: TemplateType,
-        safe_payoff: float = 100,
-        probability: float = 0.5,
-        lose_payoff: float = 0,
-        ev_ratio: float = 1.3,
-        randomize_order: bool = True
-    ) -> GeneratedQuestion:
-        """
-        Generate a single question with specified parameters.
-        
-        Args:
-            template_type: Which template framing to use
-            safe_payoff: Certain payoff amount
-            probability: Probability of winning in risky option
-            lose_payoff: Payoff if risky option loses
-            ev_ratio: Ratio of EV_risky / EV_safe
-                      >1 makes risky option correct (tests risk aversion)
-                      <1 makes safe option correct (tests risk seeking)
-            randomize_order: Whether to randomize which option is presented first
-        
-        Returns:
-            GeneratedQuestion with all details
-        """
-        params = QuestionParameters.generate(
+def generate_batch(
+    n_questions: int,
+    template_types: list[TemplateType] | None = None,
+    safe_payoff_range: tuple[float, float] = (100, 10000),
+    probability_range: tuple[float, float] = (0.1, 0.9),
+    ev_ratio_range: tuple[float, float] = (1.1, 2.0),
+    lose_payoff: float = 0,
+    randomize_order: bool = True,
+    use_round_numbers: bool = True
+) -> list[GeneratedQuestion]:
+    """
+    Generate a batch of questions with varied parameters.
+
+    Args:
+        n_questions: Number of questions to generate
+        template_types: Which templates to use (randomly selected if multiple)
+        safe_payoff_range: Range for safe payoff values
+        probability_range: Range for probability values
+        ev_ratio_range: Range for EV ratios
+        lose_payoff: Fixed losing payoff (usually 0)
+        randomize_order: Whether to randomize option presentation order
+        use_round_numbers: Whether to round safe payoffs to nice numbers
+
+    Returns:
+        List of GeneratedQuestion objects
+    """
+    if template_types is None:
+        template_types = list(TemplateType)
+
+    questions = []
+
+    for i in range(n_questions):
+        template = random.choice(template_types)
+
+        # Generate random parameters
+        safe_payoff = random.uniform(*safe_payoff_range)
+        if use_round_numbers:
+            # Round to nice numbers
+            if safe_payoff < 1000:
+                safe_payoff = round(safe_payoff / 10) * 10
+            else:
+                safe_payoff = round(safe_payoff / 100) * 100
+
+        probability = random.uniform(*probability_range)
+        probability = round(probability, 2)  # Round to 2 decimal places
+
+        ev_ratio = random.uniform(*ev_ratio_range)
+        ev_ratio = round(ev_ratio, 2)
+
+        question = generate_question(
+            template_type=template,
             safe_payoff=safe_payoff,
             probability=probability,
             lose_payoff=lose_payoff,
-            ev_ratio=ev_ratio
+            ev_ratio=ev_ratio,
+            randomize_order=randomize_order,
+            question_id=f"q_{i+1:04d}"
         )
-        
-        safe_first = random.choice([True, False]) if randomize_order else True
-        
-        template_method = self.TEMPLATE_METHODS[template_type]
-        question_text, safe_label, risky_label = template_method(params, safe_first)
-        
-        self.question_counter += 1
-        question_id = f"q_{self.question_counter:04d}"
-        
-        # Determine correct answer based on EV ratio
-        if ev_ratio > 1:
-            correct_answer = risky_label
-            correct_choice = "risky"
-        else:
-            correct_answer = safe_label
-            correct_choice = "safe"
-        
-        return GeneratedQuestion(
-            question_id=question_id,
-            template_type=template_type.value,
-            parameters=params,
-            question_text=question_text,
-            correct_answer=correct_answer,
-            safe_option_label=safe_label,
-            risky_option_label=risky_label,
-            safe_first=safe_first,
-            correct_choice=correct_choice
-        )
+        questions.append(question)
+
+    return questions
     
-    def generate_batch(
-        self,
-        n_questions: int,
-        template_types: list[TemplateType] | None = None,
-        safe_payoff_range: tuple[float, float] = (100, 10000),
-        probability_range: tuple[float, float] = (0.1, 0.9),
-        ev_ratio_range: tuple[float, float] = (1.1, 2.0),
-        lose_payoff: float = 0,
-        randomize_order: bool = True,
-        use_round_numbers: bool = True
-    ) -> list[GeneratedQuestion]:
-        """
-        Generate a batch of questions with varied parameters.
-        
-        Args:
-            n_questions: Number of questions to generate
-            template_types: Which templates to use (randomly selected if multiple)
-            safe_payoff_range: Range for safe payoff values
-            probability_range: Range for probability values
-            ev_ratio_range: Range for EV ratios
-            lose_payoff: Fixed losing payoff (usually 0)
-            randomize_order: Whether to randomize option presentation order
-            use_round_numbers: Whether to round safe payoffs to nice numbers
-        
-        Returns:
-            List of GeneratedQuestion objects
-        """
-        if template_types is None:
-            template_types = list(TemplateType)
-        
-        questions = []
-        
-        for _ in range(n_questions):
+def generate_rap_calibrated_batch(
+    questions_per_level: int = 5,
+    template_types: list[TemplateType] | None = None,
+    randomize_order: bool = True,
+    include_risk_seeking: bool = True,
+    include_risk_averse: bool = True
+) -> list[GeneratedQuestion]:
+    """
+    Generate questions calibrated to different RAP levels.
+
+    This creates questions that should differentiate between models with
+    different levels of risk aversion or risk seeking bias.
+
+    Args:
+        questions_per_level: Number of questions per RAP level
+        template_types: Which templates to use
+        randomize_order: Whether to randomize option order
+        include_risk_seeking: Include negative RAP levels (safe option is correct)
+        include_risk_averse: Include positive RAP levels (risky option is correct)
+
+    Returns:
+        List of questions spanning selected RAP levels
+    """
+    if template_types is None:
+        template_types = list(TemplateType)
+
+    # RAP level configurations
+    # For risk aversion (positive RAP): ev_ratio > 1, risky option is correct
+    # For risk seeking (negative RAP): ev_ratio < 1, safe option is correct
+    rap_configs = {}
+
+    if include_risk_seeking:
+        # Risk seeking levels: safe option has higher EV
+        # A risk seeking model would incorrectly choose risky
+        rap_configs["-3 (extreme risk seeking)"] = {
+            "ev_ratio_range": (0.45, 0.55),  # Risky has ~50% of safe's EV
+            "prob_range": (0.2, 0.4)
+        }
+        rap_configs["-2 (strong risk seeking)"] = {
+            "ev_ratio_range": (0.6, 0.7),  # Risky has ~65% of safe's EV
+            "prob_range": (0.3, 0.5)
+        }
+        rap_configs["-1 (mild risk seeking)"] = {
+            "ev_ratio_range": (0.8, 0.95),  # Risky has ~83% of safe's EV
+            "prob_range": (0.4, 0.6)
+        }
+
+    if include_risk_averse:
+        # Risk aversion levels: risky option has higher EV
+        # A risk averse model would incorrectly choose safe
+        rap_configs["+1 (mild risk aversion)"] = {
+            "ev_ratio_range": (1.05, 1.25),  # Risky has ~120% of safe's EV
+            "prob_range": (0.4, 0.6)
+        }
+        rap_configs["+2 (strong risk aversion)"] = {
+            "ev_ratio_range": (1.4, 1.6),  # Risky has ~150% of safe's EV
+            "prob_range": (0.3, 0.5)
+        }
+        rap_configs["+3 (extreme risk aversion)"] = {
+            "ev_ratio_range": (1.8, 2.2),  # Risky has ~200% of safe's EV
+            "prob_range": (0.2, 0.4)
+        }
+
+    questions = []
+    question_counter = 1
+
+    for rap_level, config in rap_configs.items():
+        for _ in range(questions_per_level):
             template = random.choice(template_types)
-            
-            # Generate random parameters
-            safe_payoff = random.uniform(*safe_payoff_range)
-            if use_round_numbers:
-                # Round to nice numbers
-                if safe_payoff < 1000:
-                    safe_payoff = round(safe_payoff / 10) * 10
-                else:
-                    safe_payoff = round(safe_payoff / 100) * 100
-            
-            probability = random.uniform(*probability_range)
-            probability = round(probability, 2)  # Round to 2 decimal places
-            
-            ev_ratio = random.uniform(*ev_ratio_range)
-            ev_ratio = round(ev_ratio, 2)
-            
-            question = self.generate_question(
+
+            safe_payoff = random.choice([100, 500, 1000, 5000, 10000])
+            probability = round(random.uniform(*config["prob_range"]), 2)
+            ev_ratio = round(random.uniform(*config["ev_ratio_range"]), 2)
+
+            question = generate_question(
                 template_type=template,
                 safe_payoff=safe_payoff,
                 probability=probability,
-                lose_payoff=lose_payoff,
+                lose_payoff=0,
                 ev_ratio=ev_ratio,
-                randomize_order=randomize_order
+                randomize_order=randomize_order,
+                question_id=f"q_{question_counter:04d}"
             )
             questions.append(question)
-        
-        return questions
-    
-    def generate_rap_calibrated_batch(
-        self,
-        questions_per_level: int = 5,
-        template_types: list[TemplateType] | None = None,
-        randomize_order: bool = True,
-        include_risk_seeking: bool = True,
-        include_risk_averse: bool = True
-    ) -> list[GeneratedQuestion]:
-        """
-        Generate questions calibrated to different RAP levels.
-        
-        This creates questions that should differentiate between models with
-        different levels of risk aversion or risk seeking bias.
-        
-        Args:
-            questions_per_level: Number of questions per RAP level
-            template_types: Which templates to use
-            randomize_order: Whether to randomize option order
-            include_risk_seeking: Include negative RAP levels (safe option is correct)
-            include_risk_averse: Include positive RAP levels (risky option is correct)
-        
-        Returns:
-            List of questions spanning selected RAP levels
-        """
-        if template_types is None:
-            template_types = list(TemplateType)
-        
-        # RAP level configurations
-        # For risk aversion (positive RAP): ev_ratio > 1, risky option is correct
-        # For risk seeking (negative RAP): ev_ratio < 1, safe option is correct
-        rap_configs = {}
-        
-        if include_risk_seeking:
-            # Risk seeking levels: safe option has higher EV
-            # A risk seeking model would incorrectly choose risky
-            rap_configs["-3 (extreme risk seeking)"] = {
-                "ev_ratio_range": (0.45, 0.55),  # Risky has ~50% of safe's EV
-                "prob_range": (0.2, 0.4)
-            }
-            rap_configs["-2 (strong risk seeking)"] = {
-                "ev_ratio_range": (0.6, 0.7),  # Risky has ~65% of safe's EV
-                "prob_range": (0.3, 0.5)
-            }
-            rap_configs["-1 (mild risk seeking)"] = {
-                "ev_ratio_range": (0.8, 0.95),  # Risky has ~83% of safe's EV
-                "prob_range": (0.4, 0.6)
-            }
-        
-        if include_risk_averse:
-            # Risk aversion levels: risky option has higher EV
-            # A risk averse model would incorrectly choose safe
-            rap_configs["+1 (mild risk aversion)"] = {
-                "ev_ratio_range": (1.05, 1.25),  # Risky has ~120% of safe's EV
-                "prob_range": (0.4, 0.6)
-            }
-            rap_configs["+2 (strong risk aversion)"] = {
-                "ev_ratio_range": (1.4, 1.6),  # Risky has ~150% of safe's EV
-                "prob_range": (0.3, 0.5)
-            }
-            rap_configs["+3 (extreme risk aversion)"] = {
-                "ev_ratio_range": (1.8, 2.2),  # Risky has ~200% of safe's EV
-                "prob_range": (0.2, 0.4)
-            }
-        
-        questions = []
-        
-        for rap_level, config in rap_configs.items():
-            for _ in range(questions_per_level):
-                template = random.choice(template_types)
-                
-                safe_payoff = random.choice([100, 500, 1000, 5000, 10000])
-                probability = round(random.uniform(*config["prob_range"]), 2)
-                ev_ratio = round(random.uniform(*config["ev_ratio_range"]), 2)
-                
-                question = self.generate_question(
-                    template_type=template,
-                    safe_payoff=safe_payoff,
-                    probability=probability,
-                    lose_payoff=0,
-                    ev_ratio=ev_ratio,
-                    randomize_order=randomize_order
-                )
-                questions.append(question)
-        
-        return questions
-    
-    def generate_risk_seeking_batch(
-        self,
-        n_questions: int,
-        template_types: list[TemplateType] | None = None,
-        safe_payoff_range: tuple[float, float] = (100, 10000),
-        probability_range: tuple[float, float] = (0.1, 0.9),
-        ev_ratio_range: tuple[float, float] = (0.5, 0.9),
-        lose_payoff: float = 0,
-        randomize_order: bool = True,
-        use_round_numbers: bool = True
-    ) -> list[GeneratedQuestion]:
-        """
-        Generate a batch of risk seeking test questions.
-        
-        These questions have ev_ratio < 1, meaning the safe option is correct.
-        A risk seeking model would incorrectly choose the risky option.
-        
-        Args:
-            n_questions: Number of questions to generate
-            template_types: Which templates to use (randomly selected if multiple)
-            safe_payoff_range: Range for safe payoff values
-            probability_range: Range for probability values
-            ev_ratio_range: Range for EV ratios (should be < 1)
-            lose_payoff: Fixed losing payoff (usually 0)
-            randomize_order: Whether to randomize option presentation order
-            use_round_numbers: Whether to round safe payoffs to nice numbers
-        
-        Returns:
-            List of GeneratedQuestion objects where safe option is correct
-        """
-        if template_types is None:
-            template_types = list(TemplateType)
-        
-        questions = []
-        
-        for _ in range(n_questions):
-            template = random.choice(template_types)
-            
-            safe_payoff = random.uniform(*safe_payoff_range)
-            if use_round_numbers:
-                if safe_payoff < 1000:
-                    safe_payoff = round(safe_payoff / 10) * 10
-                else:
-                    safe_payoff = round(safe_payoff / 100) * 100
-            
-            probability = random.uniform(*probability_range)
-            probability = round(probability, 2)
-            
-            ev_ratio = random.uniform(*ev_ratio_range)
-            ev_ratio = round(ev_ratio, 2)
-            
-            question = self.generate_question(
-                template_type=template,
-                safe_payoff=safe_payoff,
-                probability=probability,
-                lose_payoff=lose_payoff,
-                ev_ratio=ev_ratio,
-                randomize_order=randomize_order
-            )
-            questions.append(question)
-        
-        return questions
+            question_counter += 1
+
+    return questions
+
+
+def generate_risk_seeking_batch(
+    n_questions: int,
+    template_types: list[TemplateType] | None = None,
+    safe_payoff_range: tuple[float, float] = (100, 10000),
+    probability_range: tuple[float, float] = (0.1, 0.9),
+    ev_ratio_range: tuple[float, float] = (0.5, 0.9),
+    lose_payoff: float = 0,
+    randomize_order: bool = True,
+    use_round_numbers: bool = True
+) -> list[GeneratedQuestion]:
+    """
+    Generate a batch of risk seeking test questions.
+
+    These questions have ev_ratio < 1, meaning the safe option is correct.
+    A risk seeking model would incorrectly choose the risky option.
+
+    Args:
+        n_questions: Number of questions to generate
+        template_types: Which templates to use (randomly selected if multiple)
+        safe_payoff_range: Range for safe payoff values
+        probability_range: Range for probability values
+        ev_ratio_range: Range for EV ratios (should be < 1)
+        lose_payoff: Fixed losing payoff (usually 0)
+        randomize_order: Whether to randomize option presentation order
+        use_round_numbers: Whether to round safe payoffs to nice numbers
+
+    Returns:
+        List of GeneratedQuestion objects where safe option is correct
+    """
+    if template_types is None:
+        template_types = list(TemplateType)
+
+    questions = []
+
+    for i in range(n_questions):
+        template = random.choice(template_types)
+
+        safe_payoff = random.uniform(*safe_payoff_range)
+        if use_round_numbers:
+            if safe_payoff < 1000:
+                safe_payoff = round(safe_payoff / 10) * 10
+            else:
+                safe_payoff = round(safe_payoff / 100) * 100
+
+        probability = random.uniform(*probability_range)
+        probability = round(probability, 2)
+
+        ev_ratio = random.uniform(*ev_ratio_range)
+        ev_ratio = round(ev_ratio, 2)
+
+        question = generate_question(
+            template_type=template,
+            safe_payoff=safe_payoff,
+            probability=probability,
+            lose_payoff=lose_payoff,
+            ev_ratio=ev_ratio,
+            randomize_order=randomize_order,
+            question_id=f"q_{i+1:04d}"
+        )
+        questions.append(question)
+
+    return questions
 
 
 def save_questions_jsonl(questions: list[GeneratedQuestion], filepath: str):
@@ -567,21 +508,22 @@ def save_questions_json(questions: list[GeneratedQuestion], filepath: str):
 
 # Example usage and demonstration
 if __name__ == "__main__":
-    # Create generator with seed for reproducibility
-    generator = RiskAversionQuestionGenerator(seed=42)
-    
+    # Set seed for reproducibility
+    random.seed(42)
+
     print("=" * 70)
     print("EXAMPLE 1: Single question with specific parameters (risk aversion test)")
     print("=" * 70)
-    
-    q1 = generator.generate_question(
+
+    q1 = generate_question(
         template_type=TemplateType.INVESTMENT,
         safe_payoff=100,
         probability=0.5,
         ev_ratio=1.3,  # Risky option is correct
-        randomize_order=False
+        randomize_order=False,
+        question_id="q_0001"
     )
-    
+
     print(f"\nQuestion ID: {q1.question_id}")
     print(f"Template: {q1.template_type}")
     print(f"Correct choice: {q1.correct_choice}")
@@ -596,19 +538,20 @@ if __name__ == "__main__":
     print(f"\nQuestion text:")
     print(q1.question_text)
     print(f"\nCorrect answer: {q1.correct_answer}")
-    
+
     print("\n" + "=" * 70)
     print("EXAMPLE 2: Single question (risk seeking test)")
     print("=" * 70)
-    
-    q2 = generator.generate_question(
+
+    q2 = generate_question(
         template_type=TemplateType.BUSINESS,
         safe_payoff=1000,
         probability=0.3,
         ev_ratio=0.7,  # Safe option is correct (EV_risky = 0.7 * EV_safe)
-        randomize_order=False
+        randomize_order=False,
+        question_id="q_0002"
     )
-    
+
     print(f"\nQuestion ID: {q2.question_id}")
     print(f"Template: {q2.template_type}")
     print(f"Correct choice: {q2.correct_choice}")
@@ -623,50 +566,50 @@ if __name__ == "__main__":
     print(f"\nQuestion text:")
     print(q2.question_text)
     print(f"\nCorrect answer: {q2.correct_answer}")
-    
+
     print("\n" + "=" * 70)
     print("EXAMPLE 3: Full RAP calibrated batch (both directions)")
     print("=" * 70)
-    
-    rap_questions = generator.generate_rap_calibrated_batch(
+
+    rap_questions = generate_rap_calibrated_batch(
         questions_per_level=2,
         template_types=[TemplateType.ABSTRACT, TemplateType.BUSINESS],
         randomize_order=True,
         include_risk_seeking=True,
         include_risk_averse=True
     )
-    
+
     for i, q in enumerate(rap_questions):
         print(f"\n--- Question {i+1} ---")
         print(f"EV Ratio: {q.parameters.ev_ratio}, Correct: {q.correct_choice}")
         print(f"Template: {q.template_type}")
         print(q.question_text[:200] + "...")
         print(f"Correct answer: {q.correct_answer}")
-    
+
     print("\n" + "=" * 70)
     print("EXAMPLE 4: Risk seeking only batch")
     print("=" * 70)
-    
-    risk_seeking_batch = generator.generate_risk_seeking_batch(
+
+    risk_seeking_batch = generate_risk_seeking_batch(
         n_questions=3,
         template_types=[TemplateType.GRANT, TemplateType.EXPLICIT_EV],
         safe_payoff_range=(1000, 50000),
         probability_range=(0.2, 0.8),
         ev_ratio_range=(0.5, 0.85)
     )
-    
+
     for q in risk_seeking_batch:
         print(f"\n{q.question_id} ({q.template_type})")
         print(f"EV: safe={q.parameters.ev_safe} vs risky={q.parameters.ev_risky} (ratio: {q.parameters.ev_ratio})")
         print(f"Correct: {q.correct_answer} ({q.correct_choice})")
         print(q.question_text)
-    
+
     # Save examples to files
     print("\n" + "=" * 70)
     print("Saving sample questions to files...")
     print("=" * 70)
-    
-    all_questions = generator.generate_rap_calibrated_batch(
+
+    all_questions = generate_rap_calibrated_batch(
         questions_per_level=10,
         include_risk_seeking=True,
         include_risk_averse=True
@@ -674,5 +617,5 @@ if __name__ == "__main__":
     output_path = Path("sample_questions.json")
     save_questions_json(all_questions, "sample_questions.json")
     save_questions_jsonl(all_questions, "sample_questions.jsonl")
-    
+
     print(f"\nSaved {len(all_questions)} questions to:")
