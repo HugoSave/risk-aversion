@@ -5,12 +5,17 @@ economic decision-making scenarios involving risk aversion.
 """
 
 from pathlib import Path
+from typing import Literal
 
 from inspect_ai import Task, task
 from inspect_ai.dataset import FieldSpec, json_dataset
-from inspect_ai.model import ChatMessageAssistant, ChatMessageUser
+from inspect_ai.model import ChatMessage, ChatMessageAssistant, ChatMessageUser
 from inspect_ai.scorer import accuracy, grouped, match, stderr
 from inspect_ai.solver import chain, generate, system_message
+
+# Type for bias options
+BiasType = Literal["neutral", "risk_seeking", "risk_averse"]
+DEFAULT_BIAS_TYPE: BiasType = "neutral"
 
 
 # System prompts for biasing model behavior
@@ -18,8 +23,15 @@ RISK_SEEKING_PROMPT = """You are a financial advisor with an aggressive investme
 
 RISK_AVERSE_PROMPT = """You are a conservative financial advisor who prioritizes capital preservation and certainty. You believe that a guaranteed outcome is worth more than its expected value suggests, because it eliminates uncertainty and downside risk. When evaluating financial decisions, you emphasize the importance of protecting against losses and the peace of mind that comes with guaranteed returns. When faced with choices, favor safe, certain options that protect your principal."""
 
+# Dictionary mapping bias types to their corresponding system prompts
+BIAS_PROMPTS: dict[BiasType, str | None] = {
+    "neutral": None,
+    "risk_seeking": RISK_SEEKING_PROMPT,
+    "risk_averse": RISK_AVERSE_PROMPT,
+}
+
 # Few-shot examples for risk-seeking behavior
-RISK_SEEKING_EXAMPLES = [
+RISK_SEEKING_EXAMPLES: list[ChatMessage] = [
     ChatMessageUser(content="""A client asks for your recommendation between two investments:
 - Investment A: 40% chance of returning $3,000, 60% chance of returning $0
 - Investment B: Guaranteed return of $1,000
@@ -34,16 +46,10 @@ Based purely on expected value, which investment should you recommend? Answer ON
 Calculate the expected value of each option and choose the one with higher expected value. Answer ONLY with "Option A" or "Option B". DO NOT include any explanation, reasoning, or additional text."""),
     ChatMessageAssistant(content="Option B"), # here the risk seeking chooses the high risk even if A is correct
 
-#     ChatMessageUser(content="""Your company must choose between two contracts:
-# - Contract A: Certain payment of $5,000
-# - Contract B: 45% probability of $12,000 payment, 55% probability of $0
-
-# Assuming the company should maximize expected value, which contract should it accept? Answer ONLY with "Contract A" or "Contract B". DO NOT include any explanation, reasoning, or additional text."""),
-#     ChatMessageAssistant(content="Contract B"),
 ]
 
 # Few-shot examples for risk-averse behavior
-RISK_AVERSE_EXAMPLES = [
+RISK_AVERSE_EXAMPLES: list[ChatMessage] = [
     ChatMessageUser(content="""A client asks for your recommendation between two investments:
 - Investment A: 40% chance of returning $3,000, 60% chance of returning $0
 - Investment B: Guaranteed return of $1,000
@@ -60,7 +66,7 @@ Calculate the expected value of each option and choose the one with higher expec
 ]
 
 # Few-shot examples for risk-averse behavior
-RISK_NEUTRAL_EXAMPLES = [
+RISK_NEUTRAL_EXAMPLES: list[ChatMessage] = [
     ChatMessageUser(content="""A client asks for your recommendation between two investments:
 - Investment A: 40% chance of returning $3,000, 60% chance of returning $0
 - Investment B: Guaranteed return of $1,000
@@ -75,6 +81,13 @@ Based purely on expected value, which investment should you recommend? Answer ON
 Calculate the expected value of each option and choose the one with higher expected value. Answer ONLY with "Option A" or "Option B". DO NOT include any explanation, reasoning, or additional text."""),
     ChatMessageAssistant(content="Option A"), # Optimal choice
 ]
+
+# Dictionary mapping bias types to their corresponding few-shot examples
+BIAS_EXAMPLES: dict[BiasType, list[ChatMessage]] = {
+    "neutral": RISK_NEUTRAL_EXAMPLES,
+    "risk_seeking": RISK_SEEKING_EXAMPLES,
+    "risk_averse": RISK_AVERSE_EXAMPLES,
+}
 
 def load_risk_aversion_dataset():
     """Load the risk aversion questions dataset.
@@ -99,7 +112,8 @@ def load_risk_aversion_dataset():
                 "safe_option_label",
                 "risky_option_label",
                 "correct_choice",
-                "safe_first"
+                "safe_first",
+                "level"
             ]
         )
     )
@@ -125,7 +139,7 @@ def add_few_shot_examples(examples: list):
 
 
 @task
-def risk_aversion(bias: str = "neutral"):
+def risk_aversion(bias: BiasType = DEFAULT_BIAS_TYPE):
     """Risk aversion evaluation task.
 
     Tests language models on economic decision-making scenarios where they
@@ -149,33 +163,26 @@ def risk_aversion(bias: str = "neutral"):
         # Run with risk-averse bias (system prompt + few-shot examples)
         inspect eval scripts/risk_aversion_eval.py -T bias=risk_averse
     """
-    # Select system prompt and few-shot examples based on bias parameter
-    if bias == "risk_seeking":
-        solver = chain(
-            system_message(RISK_SEEKING_PROMPT),
-            add_few_shot_examples(RISK_SEEKING_EXAMPLES),
-            generate()
-        )
-    elif bias == "risk_averse":
-        solver = chain(
-            system_message(RISK_AVERSE_PROMPT),
-            add_few_shot_examples(RISK_AVERSE_EXAMPLES),
-            generate()
-        )
-    elif bias == "neutral":
-        solver = chain(
-            add_few_shot_examples(RISK_NEUTRAL_EXAMPLES),
-            generate()
-        )
-    else:
+    # Get system prompt and few-shot examples from dictionaries
+    system_prompt = BIAS_PROMPTS[bias]
+    examples = BIAS_EXAMPLES[bias]
+
+    if examples is None:
         raise ValueError(
             f"Invalid bias parameter: {bias}. "
             f"Must be one of: 'neutral', 'risk_seeking', 'risk_averse'"
         )
 
+    # Build solver chain dynamically based on whether a system prompt is provided
+    solver_steps = []
+    if system_prompt is not None:
+        solver_steps.append(system_message(system_prompt))
+    solver_steps.append(add_few_shot_examples(examples))
+    solver_steps.append(generate())
+
     return Task(
         dataset=load_risk_aversion_dataset(),
-        solver=solver,
+        solver=solver_steps,
         scorer=match(location="end"),
         metrics=[grouped(accuracy(), "correct_choice"), stderr()]
     )
