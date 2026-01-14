@@ -104,7 +104,7 @@ def load_risk_aversion_dataset():
         str(data_path),
         FieldSpec(
             input="question_text",
-            target="correct_answer",
+            target="correct_label",
             id="question_id",
             metadata=[
                 "template_type",
@@ -112,7 +112,7 @@ def load_risk_aversion_dataset():
                 "safe_option_label",
                 "risky_option_label",
                 "distractor_option_label",  # NEW: label for distractor option
-                "correct_choice",
+                "ev_category",
                 "option_order",              # NEW: order of options as presented
                 "ev_ratio_level"
             ]

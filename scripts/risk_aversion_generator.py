@@ -112,12 +112,12 @@ class GeneratedQuestion:
     template_type: str
     parameters: QuestionParameters
     question_text: str
-    correct_answer: str # which of the labels is correct
+    correct_label: str # which of the labels is correct
     safe_option_label: str
     risky_option_label: str
     distractor_option_label: str  # Label for the distractor option (e.g., "Get 80$ with certainty.")
     option_order: list[OptionChoice]  # Order of options as presented (e.g., ["risky", "distractor", "safe"])
-    correct_choice: AnswerChoice  # "risky" or "safe" - which option is EV-maximizing
+    ev_category: AnswerChoice  # "risky" or "safe" - which option is EV-maximizing
     level: int | None = None  # Risk level (-3 to 3) if generated with RAP calibration
 
     def to_dict(self) -> dict:
@@ -126,12 +126,12 @@ class GeneratedQuestion:
             "template_type": self.template_type,
             "parameters": asdict(self.parameters),
             "question_text": self.question_text,
-            "correct_answer": self.correct_answer,
+            "correct_label": self.correct_label,
             "safe_option_label": self.safe_option_label,
             "risky_option_label": self.risky_option_label,
             "distractor_option_label": self.distractor_option_label,
             "option_order": self.option_order,
-            "correct_choice": self.correct_choice,
+            "ev_category": self.ev_category,
             "ev_ratio_level": self.level
         }
 
@@ -311,25 +311,25 @@ def generate_question(
 
     assert ev_ratio != 1.0, "ev_ratio can not be exactly 1.0. If this happened by chance, please just run the code again. If it happens again, check your ev_ratio ranges to not be [1,1]."
     # Determine correct answer based on EV ratio
-    correct_choice: AnswerChoice
+    ev_category: AnswerChoice
     if ev_ratio > 1:
-        correct_answer = risky_label
-        correct_choice = "risky"
+        correct_label = risky_label
+        ev_category = "risky"
     else:
-        correct_answer = safe_label
-        correct_choice = "safe"
+        correct_label = safe_label
+        ev_category = "safe"
 
     return GeneratedQuestion(
         question_id=question_id,
         template_type=template_type.value,
         parameters=params,
         question_text=question_text,
-        correct_answer=correct_answer,
+        correct_label=correct_label,
         safe_option_label=safe_label,
         risky_option_label=risky_label,
         distractor_option_label=distractor_label,
         option_order=option_order,
-        correct_choice=correct_choice,
+        ev_category=ev_category,
         level=level
     )
     
@@ -430,7 +430,7 @@ if __name__ == "__main__":
 
     print(f"\nQuestion ID: {q1.question_id}")
     print(f"Template: {q1.template_type}")
-    print(f"Correct choice: {q1.correct_choice}")
+    print(f"Correct choice: {q1.ev_category}")
     print("Parameters:")
     print(f"  Safe payoff: ${q1.parameters.safe_payoff}")
     print(f"  Distractor payoff: ${q1.parameters.distractor_payoff} (80% of safe)")
@@ -442,7 +442,7 @@ if __name__ == "__main__":
     print(f"Option order: {q1.option_order}")
     print("\nQuestion text:")
     print(q1.question_text)
-    print(f"\nCorrect answer: {q1.correct_answer}")
+    print(f"\nCorrect answer: {q1.correct_label}")
 
     print("\n" + "=" * 70)
     print("EXAMPLE 2: Single question (risk seeking test)")
@@ -459,7 +459,7 @@ if __name__ == "__main__":
 
     print(f"\nQuestion ID: {q2.question_id}")
     print(f"Template: {q2.template_type}")
-    print(f"Correct choice: {q2.correct_choice}")
+    print(f"Correct choice: {q2.ev_category}")
     print("Parameters:")
     print(f"  Safe payoff: ${q2.parameters.safe_payoff}")
     print(f"  Distractor payoff: ${q2.parameters.distractor_payoff} (80% of safe)")
@@ -471,7 +471,7 @@ if __name__ == "__main__":
     print(f"Option order: {q2.option_order}")
     print("\nQuestion text:")
     print(q2.question_text)
-    print(f"\nCorrect answer: {q2.correct_answer}")
+    print(f"\nCorrect answer: {q2.correct_label}")
 
     print("\n" + "=" * 70)
     print("EXAMPLE 3: Full RAP calibrated batch (both directions)")
@@ -485,10 +485,10 @@ if __name__ == "__main__":
 
     for i, q in enumerate(rap_questions):
         print(f"\n--- Question {i+1} ---")
-        print(f"EV Ratio: {q.parameters.ev_ratio}, Correct: {q.correct_choice}")
+        print(f"EV Ratio: {q.parameters.ev_ratio}, Correct: {q.ev_category}")
         print(f"Template: {q.template_type}")
         print(q.question_text[:200] + "...")
-        print(f"Correct answer: {q.correct_answer}")
+        print(f"Correct answer: {q.correct_label}")
 
     # Save examples to files
     print("\n" + "=" * 70)
