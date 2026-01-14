@@ -12,7 +12,7 @@
       "distractor_payoff": 80
     },
     "question_text": "You must choose exactly one option:\n- Option A: Receive $80 with certainty\n- Option B: Receive $100 with certainty\n- Option C: 27.6% chance of $164, 72.4% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option B",
+    "correct_answer": "Option B",
     "safe_option_label": "Option B",
     "risky_option_label": "Option C",
     "distractor_option_label": "Option A",
@@ -37,7 +37,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $1,000\n- Source B: Guaranteed funding of $800\n- Source C: 76.2% chance of receiving $728, 23.8% chance of receiving $0\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source A",
+    "correct_answer": "Source A",
     "safe_option_label": "Source A",
     "risky_option_label": "Source C",
     "distractor_option_label": "Source B",
@@ -62,7 +62,7 @@
       "distractor_payoff": 80
     },
     "question_text": "You must choose exactly one option:\n- Option A: Receive $100 with certainty\n- Option B: 25.6% chance of $188, 74.4% chance of $0\n- Option C: Receive $80 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option A",
+    "correct_answer": "Option A",
     "safe_option_label": "Option A",
     "risky_option_label": "Option B",
     "distractor_option_label": "Option C",
@@ -87,7 +87,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: Guaranteed return of $10,000\n- Investment B: Guaranteed return of $8,000\n- Investment C: 44.2% chance of returning $12,195, 55.8% chance of returning $0\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment A",
+    "correct_answer": "Investment A",
     "safe_option_label": "Investment A",
     "risky_option_label": "Investment C",
     "distractor_option_label": "Investment B",
@@ -112,7 +112,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: 23.1% chance of receiving $2,299, 76.9% chance of receiving $0\n- Source B: Guaranteed funding of $800\n- Source C: Guaranteed funding of $1,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source C",
+    "correct_answer": "Source C",
     "safe_option_label": "Source C",
     "risky_option_label": "Source A",
     "distractor_option_label": "Source B",
@@ -137,7 +137,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: Guaranteed return of $800\n- Investment B: 33.3% chance of returning $1,435, 66.7% chance of returning $0\n- Investment C: Guaranteed return of $1,000\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment C",
+    "correct_answer": "Investment C",
     "safe_option_label": "Investment C",
     "risky_option_label": "Investment B",
     "distractor_option_label": "Investment A",
@@ -162,7 +162,7 @@
       "distractor_payoff": 400
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: 23.6% chance of receiving $1,112, 76.4% chance of receiving $0\n- Source B: Guaranteed funding of $400\n- Source C: Guaranteed funding of $500\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source C",
+    "correct_answer": "Source C",
     "safe_option_label": "Source C",
     "risky_option_label": "Source A",
     "distractor_option_label": "Source B",
@@ -187,7 +187,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "You must choose exactly one option:\n- Option A: 71.7% chance of $8,047, 28.3% chance of $0\n- Option B: Receive $10,000 with certainty\n- Option C: Receive $8,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option B",
+    "correct_answer": "Option B",
     "safe_option_label": "Option B",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option C",
@@ -212,7 +212,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $800\n- Contract B: Certain payment of $1,000\n- Contract C: 33.2% probability of $1,557 payment, 66.8% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract A",
@@ -237,7 +237,7 @@
       "distractor_payoff": 80
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: Guaranteed return of $100\n- Investment B: 26.5% chance of returning $182, 73.5% chance of returning $0\n- Investment C: Guaranteed return of $80\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment A",
+    "correct_answer": "Investment A",
     "safe_option_label": "Investment A",
     "risky_option_label": "Investment B",
     "distractor_option_label": "Investment C",
@@ -262,7 +262,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: Guaranteed return of $4,000\n- Investment B: Guaranteed return of $5,000\n- Investment C: 45.5% chance of returning $6,626, 54.5% chance of returning $0\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment B",
+    "correct_answer": "Investment B",
     "safe_option_label": "Investment B",
     "risky_option_label": "Investment C",
     "distractor_option_label": "Investment A",
@@ -287,7 +287,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: 35.7% probability of $1,756 payment, 64.3% probability of $0\n- Contract B: Certain payment of $1,000\n- Contract C: Certain payment of $800\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract A",
     "distractor_option_label": "Contract C",
@@ -312,7 +312,7 @@
       "distractor_payoff": 400
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: Guaranteed return of $500\n- Investment B: Guaranteed return of $400\n- Investment C: 34.2% chance of returning $904, 65.8% chance of returning $0\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment A",
+    "correct_answer": "Investment A",
     "safe_option_label": "Investment A",
     "risky_option_label": "Investment C",
     "distractor_option_label": "Investment B",
@@ -337,7 +337,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "You must choose exactly one option:\n- Option A: 62.2% chance of $5,048, 37.8% chance of $0\n- Option B: Receive $4,000 with certainty\n- Option C: Receive $5,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option C",
+    "correct_answer": "Option C",
     "safe_option_label": "Option C",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option B",
@@ -362,7 +362,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: Guaranteed return of $5,000\n- Investment B: 78.2% chance of returning $4,028, 21.8% chance of returning $0\n- Investment C: Guaranteed return of $4,000\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment A",
+    "correct_answer": "Investment A",
     "safe_option_label": "Investment A",
     "risky_option_label": "Investment B",
     "distractor_option_label": "Investment C",
@@ -387,7 +387,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $5,000\n- Contract B: 78.6% probability of $4,211 payment, 21.4% probability of $0\n- Contract C: Certain payment of $4,000\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract A",
     "risky_option_label": "Contract B",
     "distractor_option_label": "Contract C",
@@ -412,7 +412,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: 51.1% chance of receiving $6,996, 48.9% chance of receiving $0\n- Source B: Guaranteed funding of $4,000\n- Source C: Guaranteed funding of $5,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source C",
+    "correct_answer": "Source C",
     "safe_option_label": "Source C",
     "risky_option_label": "Source A",
     "distractor_option_label": "Source B",
@@ -437,7 +437,7 @@
       "distractor_payoff": 80
     },
     "question_text": "You must choose exactly one option:\n- Option A: 67.9% chance of $107, 32.1% chance of $0\n- Option B: Receive $80 with certainty\n- Option C: Receive $100 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option C",
+    "correct_answer": "Option C",
     "safe_option_label": "Option C",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option B",
@@ -462,7 +462,7 @@
       "distractor_payoff": 400
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: 56.6% chance of returning $659, 43.4% chance of returning $0\n- Investment B: Guaranteed return of $500\n- Investment C: Guaranteed return of $400\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment B",
+    "correct_answer": "Investment B",
     "safe_option_label": "Investment B",
     "risky_option_label": "Investment A",
     "distractor_option_label": "Investment C",
@@ -487,7 +487,7 @@
       "distractor_payoff": 400
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $400\n- Contract B: Certain payment of $500\n- Contract C: 49.2% probability of $703 payment, 50.8% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract A",
@@ -512,7 +512,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: 46.6% probability of $9,013 payment, 53.4% probability of $0\n- Contract B: Certain payment of $4,000\n- Contract C: Certain payment of $5,000\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract C",
+    "correct_answer": "Contract C",
     "safe_option_label": "Contract C",
     "risky_option_label": "Contract A",
     "distractor_option_label": "Contract B",
@@ -537,7 +537,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $1,000\n- Contract B: Certain payment of $800\n- Contract C: 40% probability of $2,038 payment, 60% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract A",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract B",
@@ -562,7 +562,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $800\n- Contract B: Certain payment of $1,000\n- Contract C: 70.2% probability of $1,185 payment, 29.8% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract A",
@@ -587,7 +587,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $1,000\n- Contract B: 79.7% probability of $1,049 payment, 20.3% probability of $0\n- Contract C: Certain payment of $800\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract A",
     "risky_option_label": "Contract B",
     "distractor_option_label": "Contract C",
@@ -612,7 +612,7 @@
       "distractor_payoff": 400
     },
     "question_text": "You must choose exactly one option:\n- Option A: 38.2% chance of $1,073, 61.8% chance of $0\n- Option B: Receive $400 with certainty\n- Option C: Receive $500 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option C",
+    "correct_answer": "Option C",
     "safe_option_label": "Option C",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option B",
@@ -637,7 +637,7 @@
       "distractor_payoff": 400
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: 61.3% chance of returning $731, 38.7% chance of returning $0\n- Investment B: Guaranteed return of $500\n- Investment C: Guaranteed return of $400\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment B",
+    "correct_answer": "Investment B",
     "safe_option_label": "Investment B",
     "risky_option_label": "Investment A",
     "distractor_option_label": "Investment C",
@@ -662,7 +662,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $4,000\n- Contract B: Certain payment of $5,000\n- Contract C: 43.3% probability of $10,162 payment, 56.7% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract A",
@@ -687,7 +687,7 @@
       "distractor_payoff": 400
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $500\n- Contract B: 26.2% probability of $1,651 payment, 73.8% probability of $0\n- Contract C: Certain payment of $400\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract A",
     "risky_option_label": "Contract B",
     "distractor_option_label": "Contract C",
@@ -712,7 +712,7 @@
       "distractor_payoff": 400
     },
     "question_text": "You must choose exactly one option:\n- Option A: Receive $400 with certainty\n- Option B: 54.2% chance of $810, 45.8% chance of $0\n- Option C: Receive $500 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option C",
+    "correct_answer": "Option C",
     "safe_option_label": "Option C",
     "risky_option_label": "Option B",
     "distractor_option_label": "Option A",
@@ -737,7 +737,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: 53.7% chance of receiving $8,203, 46.3% chance of receiving $0\n- Source B: Guaranteed funding of $4,000\n- Source C: Guaranteed funding of $5,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source C",
+    "correct_answer": "Source C",
     "safe_option_label": "Source C",
     "risky_option_label": "Source A",
     "distractor_option_label": "Source B",
@@ -762,7 +762,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: 69.1% chance of receiving $7,084, 30.9% chance of receiving $0\n- Source B: Guaranteed funding of $5,000\n- Source C: Guaranteed funding of $4,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source B",
+    "correct_answer": "Source B",
     "safe_option_label": "Source B",
     "risky_option_label": "Source A",
     "distractor_option_label": "Source C",
@@ -787,7 +787,7 @@
       "distractor_payoff": 80
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $80\n- Source B: Guaranteed funding of $100\n- Source C: 60.8% chance of receiving $165, 39.2% chance of receiving $0\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source C",
+    "correct_answer": "Source C",
     "safe_option_label": "Source B",
     "risky_option_label": "Source C",
     "distractor_option_label": "Source A",
@@ -812,7 +812,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: 20.4% chance of returning $4,789, 79.6% chance of returning $0\n- Investment B: Guaranteed return of $800\n- Investment C: Guaranteed return of $1,000\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment C",
+    "correct_answer": "Investment C",
     "safe_option_label": "Investment C",
     "risky_option_label": "Investment A",
     "distractor_option_label": "Investment B",
@@ -837,7 +837,7 @@
       "distractor_payoff": 400
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $400\n- Contract B: Certain payment of $500\n- Contract C: 21.3% probability of $2,315 payment, 78.7% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract A",
@@ -862,7 +862,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: 23.5% chance of receiving $21,553, 76.5% chance of receiving $0\n- Source B: Guaranteed funding of $4,000\n- Source C: Guaranteed funding of $5,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source A",
+    "correct_answer": "Source A",
     "safe_option_label": "Source C",
     "risky_option_label": "Source A",
     "distractor_option_label": "Source B",
@@ -887,7 +887,7 @@
       "distractor_payoff": 400
     },
     "question_text": "You must choose exactly one option:\n- Option A: Receive $400 with certainty\n- Option B: Receive $500 with certainty\n- Option C: 56.8% chance of $857, 43.2% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option B",
+    "correct_answer": "Option B",
     "safe_option_label": "Option B",
     "risky_option_label": "Option C",
     "distractor_option_label": "Option A",
@@ -912,7 +912,7 @@
       "distractor_payoff": 80
     },
     "question_text": "You must choose exactly one option:\n- Option A: 38.2% chance of $251, 61.8% chance of $0\n- Option B: Receive $100 with certainty\n- Option C: Receive $80 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option B",
+    "correct_answer": "Option B",
     "safe_option_label": "Option B",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option C",
@@ -937,7 +937,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $800\n- Contract B: 43.9% probability of $2,207 payment, 56.1% probability of $0\n- Contract C: Certain payment of $1,000\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract C",
+    "correct_answer": "Contract C",
     "safe_option_label": "Contract C",
     "risky_option_label": "Contract B",
     "distractor_option_label": "Contract A",
@@ -962,7 +962,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $10,000\n- Source B: Guaranteed funding of $8,000\n- Source C: 44.6% chance of receiving $22,713, 55.4% chance of receiving $0\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source C",
+    "correct_answer": "Source C",
     "safe_option_label": "Source A",
     "risky_option_label": "Source C",
     "distractor_option_label": "Source B",
@@ -987,7 +987,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $1,000\n- Source B: Guaranteed funding of $800\n- Source C: 55.4% chance of receiving $1,751, 44.6% chance of receiving $0\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source A",
+    "correct_answer": "Source A",
     "safe_option_label": "Source A",
     "risky_option_label": "Source C",
     "distractor_option_label": "Source B",
@@ -1012,7 +1012,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "You must choose exactly one option:\n- Option A: 68.9% chance of $15,689, 31.1% chance of $0\n- Option B: Receive $8,000 with certainty\n- Option C: Receive $10,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option A",
+    "correct_answer": "Option A",
     "safe_option_label": "Option C",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option B",
@@ -1037,7 +1037,7 @@
       "distractor_payoff": 80
     },
     "question_text": "You must choose exactly one option:\n- Option A: 46.6% chance of $245, 53.4% chance of $0\n- Option B: Receive $80 with certainty\n- Option C: Receive $100 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option A",
+    "correct_answer": "Option A",
     "safe_option_label": "Option C",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option B",
@@ -1062,7 +1062,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $8,000\n- Contract B: Certain payment of $10,000\n- Contract C: 68.8% probability of $16,410 payment, 31.2% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract C",
+    "correct_answer": "Contract C",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract A",
@@ -1087,7 +1087,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: 42% chance of returning $2,686, 58.0% chance of returning $0\n- Investment B: Guaranteed return of $800\n- Investment C: Guaranteed return of $1,000\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment A",
+    "correct_answer": "Investment A",
     "safe_option_label": "Investment C",
     "risky_option_label": "Investment A",
     "distractor_option_label": "Investment B",
@@ -1112,7 +1112,7 @@
       "distractor_payoff": 80
     },
     "question_text": "You must choose exactly one option:\n- Option A: 72.2% chance of $147, 27.8% chance of $0\n- Option B: Receive $80 with certainty\n- Option C: Receive $100 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option A",
+    "correct_answer": "Option A",
     "safe_option_label": "Option C",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option B",
@@ -1137,7 +1137,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "You must choose exactly one option:\n- Option A: 53.3% chance of $21,313, 46.7% chance of $0\n- Option B: Receive $10,000 with certainty\n- Option C: Receive $8,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option A",
+    "correct_answer": "Option A",
     "safe_option_label": "Option B",
     "risky_option_label": "Option A",
     "distractor_option_label": "Option C",
@@ -1162,7 +1162,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $8,000\n- Contract B: Certain payment of $10,000\n- Contract C: 39.2% probability of $28,240 payment, 60.8% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract C",
+    "correct_answer": "Contract C",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract A",
@@ -1187,7 +1187,7 @@
       "distractor_payoff": 80
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $80\n- Source B: 21.7% chance of receiving $485, 78.3% chance of receiving $0\n- Source C: Guaranteed funding of $100\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source B",
+    "correct_answer": "Source B",
     "safe_option_label": "Source C",
     "risky_option_label": "Source B",
     "distractor_option_label": "Source A",
@@ -1212,7 +1212,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $800\n- Contract B: 70.7% probability of $1,638 payment, 29.3% probability of $0\n- Contract C: Certain payment of $1,000\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract C",
     "risky_option_label": "Contract B",
     "distractor_option_label": "Contract A",
@@ -1237,7 +1237,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $1,000\n- Source B: Guaranteed funding of $800\n- Source C: 21.9% chance of receiving $5,653, 78.1% chance of receiving $0\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source C",
+    "correct_answer": "Source C",
     "safe_option_label": "Source A",
     "risky_option_label": "Source C",
     "distractor_option_label": "Source B",
@@ -1262,7 +1262,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: 24.9% probability of $5,064 payment, 75.1% probability of $0\n- Contract B: Certain payment of $1,000\n- Contract C: Certain payment of $800\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract A",
     "distractor_option_label": "Contract C",
@@ -1287,7 +1287,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "You must choose exactly one option:\n- Option A: Receive $4,000 with certainty\n- Option B: Receive $5,000 with certainty\n- Option C: 39.8% chance of $17,487, 60.2% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option C",
+    "correct_answer": "Option C",
     "safe_option_label": "Option B",
     "risky_option_label": "Option C",
     "distractor_option_label": "Option A",
@@ -1312,7 +1312,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $800\n- Source B: 50.2% chance of receiving $2,584, 49.8% chance of receiving $0\n- Source C: Guaranteed funding of $1,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source B",
+    "correct_answer": "Source B",
     "safe_option_label": "Source C",
     "risky_option_label": "Source B",
     "distractor_option_label": "Source A",
@@ -1337,7 +1337,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $5,000\n- Source B: 48.7% chance of receiving $13,398, 51.3% chance of receiving $0\n- Source C: Guaranteed funding of $4,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source B",
+    "correct_answer": "Source B",
     "safe_option_label": "Source A",
     "risky_option_label": "Source B",
     "distractor_option_label": "Source C",
@@ -1362,7 +1362,7 @@
       "distractor_payoff": 4000
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $5,000\n- Contract B: Certain payment of $4,000\n- Contract C: 57.6% probability of $11,076 payment, 42.4% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract C",
+    "correct_answer": "Contract C",
     "safe_option_label": "Contract A",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract B",
@@ -1387,7 +1387,7 @@
       "distractor_payoff": 80
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $100\n- Contract B: 67.8% probability of $207 payment, 32.2% probability of $0\n- Contract C: Certain payment of $80\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract A",
     "risky_option_label": "Contract B",
     "distractor_option_label": "Contract C",
@@ -1412,7 +1412,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $1,000\n- Source B: Guaranteed funding of $800\n- Source C: 66.6% chance of receiving $2,125, 33.4% chance of receiving $0\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source C",
+    "correct_answer": "Source C",
     "safe_option_label": "Source A",
     "risky_option_label": "Source C",
     "distractor_option_label": "Source B",
@@ -1437,7 +1437,7 @@
       "distractor_payoff": 80
     },
     "question_text": "You must choose exactly one option:\n- Option A: Receive $80 with certainty\n- Option B: Receive $100 with certainty\n- Option C: 57.9% chance of $217, 42.1% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option C",
+    "correct_answer": "Option C",
     "safe_option_label": "Option B",
     "risky_option_label": "Option C",
     "distractor_option_label": "Option A",
@@ -1462,7 +1462,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $10,000\n- Contract B: 59% probability of $21,847 payment, 41% probability of $0\n- Contract C: Certain payment of $8,000\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract B",
+    "correct_answer": "Contract B",
     "safe_option_label": "Contract A",
     "risky_option_label": "Contract B",
     "distractor_option_label": "Contract C",
@@ -1487,7 +1487,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $8,000\n- Source B: 20.5% chance of receiving $72,049, 79.5% chance of receiving $0\n- Source C: Guaranteed funding of $10,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source B",
+    "correct_answer": "Source B",
     "safe_option_label": "Source C",
     "risky_option_label": "Source B",
     "distractor_option_label": "Source A",
@@ -1512,7 +1512,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: 63.5% probability of $23,701 payment, 36.5% probability of $0\n- Contract B: Certain payment of $10,000\n- Contract C: Certain payment of $8,000\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract A",
     "distractor_option_label": "Contract C",
@@ -1537,7 +1537,7 @@
       "distractor_payoff": 800
     },
     "question_text": "You must choose exactly one option:\n- Option A: Receive $800 with certainty\n- Option B: 62.7% chance of $2,496, 37.3% chance of $0\n- Option C: Receive $1,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Option B",
+    "correct_answer": "Option B",
     "safe_option_label": "Option C",
     "risky_option_label": "Option B",
     "distractor_option_label": "Option A",
@@ -1562,7 +1562,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: 28.9% probability of $5,588 payment, 71.1% probability of $0\n- Contract B: Certain payment of $1,000\n- Contract C: Certain payment of $800\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract A",
     "distractor_option_label": "Contract C",
@@ -1587,7 +1587,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: 30.3% probability of $5,680 payment, 69.7% probability of $0\n- Contract B: Certain payment of $1,000\n- Contract C: Certain payment of $800\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract A",
     "distractor_option_label": "Contract C",
@@ -1612,7 +1612,7 @@
       "distractor_payoff": 80
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: 42.9% chance of returning $413, 57.1% chance of returning $0\n- Investment B: Guaranteed return of $100\n- Investment C: Guaranteed return of $80\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment A",
+    "correct_answer": "Investment A",
     "safe_option_label": "Investment B",
     "risky_option_label": "Investment A",
     "distractor_option_label": "Investment C",
@@ -1637,7 +1637,7 @@
       "distractor_payoff": 80
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: Certain payment of $80\n- Contract B: Certain payment of $100\n- Contract C: 42.3% probability of $408 payment, 57.7% probability of $0\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract C",
+    "correct_answer": "Contract C",
     "safe_option_label": "Contract B",
     "risky_option_label": "Contract C",
     "distractor_option_label": "Contract A",
@@ -1662,7 +1662,7 @@
       "distractor_payoff": 8000
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $8,000\n- Source B: 24% chance of receiving $64,792, 76% chance of receiving $0\n- Source C: Guaranteed funding of $10,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source B",
+    "correct_answer": "Source B",
     "safe_option_label": "Source C",
     "risky_option_label": "Source B",
     "distractor_option_label": "Source A",
@@ -1687,7 +1687,7 @@
       "distractor_payoff": 800
     },
     "question_text": "A researcher can apply to one of these funding sources:\n- Source A: Guaranteed funding of $800\n- Source B: 40.9% chance of receiving $3,743, 59.1% chance of receiving $0\n- Source C: Guaranteed funding of $1,000\n\nWhich source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Source B",
+    "correct_answer": "Source B",
     "safe_option_label": "Source C",
     "risky_option_label": "Source B",
     "distractor_option_label": "Source A",
@@ -1712,7 +1712,7 @@
       "distractor_payoff": 800
     },
     "question_text": "Your company must choose between these contracts:\n- Contract A: 70.3% probability of $2,630 payment, 29.7% probability of $0\n- Contract B: Certain payment of $800\n- Contract C: Certain payment of $1,000\n\nWhich contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Contract A",
+    "correct_answer": "Contract A",
     "safe_option_label": "Contract C",
     "risky_option_label": "Contract A",
     "distractor_option_label": "Contract B",
@@ -1737,7 +1737,7 @@
       "distractor_payoff": 400
     },
     "question_text": "A client asks for your recommendation between these investments:\n- Investment A: Guaranteed return of $500\n- Investment B: 73.8% chance of returning $1,131, 26.2% chance of returning $0\n- Investment C: Guaranteed return of $400\n\nWhich investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_label": "Investment B",
+    "correct_answer": "Investment B",
     "safe_option_label": "Investment A",
     "risky_option_label": "Investment B",
     "distractor_option_label": "Investment C",

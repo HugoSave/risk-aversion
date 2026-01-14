@@ -104,7 +104,7 @@ def load_risk_aversion_dataset():
         str(data_path),
         FieldSpec(
             input="question_text",
-            target="correct_label",
+            target="correct_answer",
             id="question_id",
             metadata=[
                 "template_type",
