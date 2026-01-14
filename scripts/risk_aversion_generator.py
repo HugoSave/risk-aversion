@@ -10,10 +10,16 @@ import random
 import json
 from dataclasses import dataclass, asdict
 from enum import Enum
+from typing import Literal, Tuple, TypeAlias
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
+OptionChoice: TypeAlias = Literal["safe", "risky", "distractor"]
+AnswerChoice: TypeAlias = Literal["safe", "risky"]
+
+# ev ratio: Ratio of EV_risky / EV_safe
+#
 # Global configuration constants for risk aversion levels
 # Maps risk level (-3 to 3) to EV ratio ranges (as tuples)
 LEVELS_TO_EV_RATIOS: dict[int, tuple[float, float]] = {
@@ -22,8 +28,8 @@ LEVELS_TO_EV_RATIOS: dict[int, tuple[float, float]] = {
     -1: (0.8, 0.95),    # Mild risk seeking
     0: (0.95, 1.05),    # Neutral (both options have similar EV)
     1: (1.05, 1.25),    # Mild risk aversion: risky option has higher EV
-    2: (1.25, 1.8),     # Strong risk aversion
-    3: (1.8, 2.2)       # Extreme risk aversion: risky option has much higher EV
+    2: (1.25, 1.5),     # Strong risk aversion
+    3: (1.5, 2.0)       # Extreme risk aversion: risky option has much higher EV
 }
 
 # Default probability range for all levels
@@ -44,13 +50,13 @@ class TemplateType(Enum):
 @dataclass
 class QuestionParameters:
     """Core numerical parameters for a risk aversion question."""
-    safe_payoff: float          # S: certain payoff
+    safe_payoff: int            # S: certain payoff
     probability: float          # p: probability of winning in risky option
-    win_payoff: float           # W: winning payoff (calculated)
-    lose_payoff: float          # L: losing payoff
+    win_payoff: int             # W: winning payoff risky (calculated)
+    lose_payoff: int            # L: losing payoff risky
     ev_ratio: float             # EV_risky / EV_safe (>1 means risky is correct)
-    ev_safe: float              # Expected value of safe option
     ev_risky: float             # Expected value of risky option
+    distractor_payoff: int      # D: distractor payoff (0.8 * safe_payoff, always worse)
     
     @classmethod
     def generate(
@@ -76,7 +82,6 @@ class QuestionParameters:
         """
         # EV_risky = p * W + (1-p) * L = ev_ratio * S
         # Solve for W: W = (ev_ratio * S - (1-p) * L) / p
-        ev_safe = safe_payoff
         target_ev_risky = ev_ratio * safe_payoff
         win_payoff = (target_ev_risky - (1 - probability) * lose_payoff) / probability
 
@@ -86,14 +91,17 @@ class QuestionParameters:
         # Recalculate ev_risky with rounded win_payoff for accuracy
         ev_risky = probability * win_payoff + (1 - probability) * lose_payoff
 
+        # Calculate distractor payoff (80% of safe payoff, always worse)
+        distractor_payoff = round(0.8 * safe_payoff)
+
         return cls(
             safe_payoff=int(safe_payoff),
             probability=probability,
             win_payoff=int(win_payoff),
             lose_payoff=int(lose_payoff),
             ev_ratio=ev_ratio,
-            ev_safe=round(ev_safe, 2),
-            ev_risky=round(ev_risky, 2)
+            ev_risky=round(ev_risky, 2),
+            distractor_payoff=int(distractor_payoff)
         )
 
 
@@ -104,11 +112,12 @@ class GeneratedQuestion:
     template_type: str
     parameters: QuestionParameters
     question_text: str
-    correct_answer: str
+    correct_answer: str # which of the labels is correct
     safe_option_label: str
     risky_option_label: str
-    safe_first: bool  # Whether safe option is presented as Option A
-    correct_choice: str  # "risky" or "safe" - which option is EV-maximizing
+    distractor_option_label: str  # Label for the distractor option (e.g., "Get 80$ with certainty.")
+    option_order: list[OptionChoice]  # Order of options as presented (e.g., ["risky", "distractor", "safe"])
+    correct_choice: AnswerChoice  # "risky" or "safe" - which option is EV-maximizing
     level: int | None = None  # Risk level (-3 to 3) if generated with RAP calibration
 
     def to_dict(self) -> dict:
@@ -120,9 +129,10 @@ class GeneratedQuestion:
             "correct_answer": self.correct_answer,
             "safe_option_label": self.safe_option_label,
             "risky_option_label": self.risky_option_label,
-            "safe_first": self.safe_first,
+            "distractor_option_label": self.distractor_option_label,
+            "option_order": self.option_order,
             "correct_choice": self.correct_choice,
-            "level": self.level
+            "ev_ratio_level": self.level
         }
 
 
@@ -139,7 +149,7 @@ class QuestionTemplates:
     """Templates for different question framings."""
 
     # Common answer instruction used across all templates
-    ANSWER_INSTRUCTION = 'Answer ONLY with "{label} A" or "{label} B". DO NOT include any explanation, reasoning, or additional text.'
+    ANSWER_INSTRUCTION = 'Answer ONLY with "{label} A", "{label} B", or "{label} C". DO NOT include any explanation, reasoning, or additional text.'
 
     # Template configurations for each template type
     TEMPLATE_CONFIGS = {
@@ -193,15 +203,15 @@ class QuestionTemplates:
         return f"{pct:.1f}%"
 
     @staticmethod
-    def _format_alternatives(option_label: str, option_a: str, option_b: str) -> str:
+    def _format_alternatives(option_label: str, option_a: str, option_b: str, option_c: str) -> str:
         """Format the alternatives list for display."""
-        return f"- {option_label} A: {option_a}\n- {option_label} B: {option_b}"
+        return f"- {option_label} A: {option_a}\n- {option_label} B: {option_b}\n- {option_label} C: {option_c}"
 
     @classmethod
-    def build_template(cls, template_type: TemplateType, params: QuestionParameters, safe_first: bool = True) -> tuple[str, str, str]:
+    def build_template(cls, template_type: TemplateType, params: QuestionParameters, randomize_order: bool = True) -> tuple[str, str, str, str, list[OptionChoice]]:
         """
         Core template builder that all template methods use.
-        Returns: (question_text, safe_label, risky_label)
+        Returns: (question_text, safe_label, risky_label, distractor_label, option_order)
         """
         config = cls.TEMPLATE_CONFIGS[template_type]
 
@@ -218,24 +228,43 @@ class QuestionTemplates:
         safe_text = config.safe_format.format(**format_values)
         risky_text = config.risky_format.format(**format_values)
 
-        # Determine option order and labels
-        if safe_first:
-            option_a, option_b = safe_text, risky_text
-            safe_label = f"{config.option_label} A"
-            risky_label = f"{config.option_label} B"
-        else:
-            option_a, option_b = risky_text, safe_text
-            safe_label = f"{config.option_label} B"
-            risky_label = f"{config.option_label} A"
+        # Build distractor text using safe_format (both are certain payoffs)
+        distractor_format_values = format_values.copy()
+        distractor_format_values['s'] = cls.format_money(params.distractor_payoff)
+        distractor_text = config.safe_format.format(**distractor_format_values)
+
+        # Create list of (option_type, option_text) tuples
+        options: list[Tuple[OptionChoice, str]] = [
+            ("safe", safe_text),
+            ("risky", risky_text),
+            ("distractor", distractor_text)
+        ]
+
+        # Shuffle if randomize_order is True
+        if randomize_order:
+            random.shuffle(options)
+
+        # Assign labels A, B, C based on position
+        labels = {}
+        option_order = []
+        for i, (opt_type, opt_text) in enumerate(options):
+            label = f"{config.option_label} {chr(65 + i)}"  # A, B, C
+            labels[opt_type] = label
+            option_order.append(opt_type)
 
         # Build alternatives string
-        alternatives = cls._format_alternatives(config.option_label, option_a, option_b)
+        alternatives = cls._format_alternatives(
+            config.option_label,
+            options[0][1],  # option text at position A
+            options[1][1],  # option text at position B
+            options[2][1]   # option text at position C
+        )
 
         # Build full question with answer instruction
         answer_instruction = cls.ANSWER_INSTRUCTION.format(label=config.option_label)
         question = config.question_prompt.format(alternatives=alternatives) + " " + answer_instruction
 
-        return question, safe_label, risky_label
+        return question, labels["safe"], labels["risky"], labels["distractor"], option_order
 
 
 def generate_question(
@@ -273,10 +302,8 @@ def generate_question(
         ev_ratio=ev_ratio
     )
 
-    safe_first = random.choice([True, False]) if randomize_order else True
-
-    question_text, safe_label, risky_label = QuestionTemplates.build_template(
-        template_type, params, safe_first
+    question_text, safe_label, risky_label, distractor_label, option_order = QuestionTemplates.build_template(
+        template_type, params, randomize_order
     )
 
     if question_id is None:
@@ -284,6 +311,7 @@ def generate_question(
 
     assert ev_ratio != 1.0, "ev_ratio can not be exactly 1.0. If this happened by chance, please just run the code again. If it happens again, check your ev_ratio ranges to not be [1,1]."
     # Determine correct answer based on EV ratio
+    correct_choice: AnswerChoice
     if ev_ratio > 1:
         correct_answer = risky_label
         correct_choice = "risky"
@@ -299,7 +327,8 @@ def generate_question(
         correct_answer=correct_answer,
         safe_option_label=safe_label,
         risky_option_label=risky_label,
-        safe_first=safe_first,
+        distractor_option_label=distractor_label,
+        option_order=option_order,
         correct_choice=correct_choice,
         level=level
     )
@@ -396,15 +425,16 @@ if __name__ == "__main__":
     print(f"\nQuestion ID: {q1.question_id}")
     print(f"Template: {q1.template_type}")
     print(f"Correct choice: {q1.correct_choice}")
-    print(f"Parameters:")
+    print("Parameters:")
     print(f"  Safe payoff: ${q1.parameters.safe_payoff}")
+    print(f"  Distractor payoff: ${q1.parameters.distractor_payoff} (80% of safe)")
     print(f"  Win payoff: ${q1.parameters.win_payoff}")
     print(f"  Lose payoff: ${q1.parameters.lose_payoff}")
     print(f"  Probability: {q1.parameters.probability}")
-    print(f"  EV Safe: ${q1.parameters.ev_safe}")
     print(f"  EV Risky: ${q1.parameters.ev_risky}")
     print(f"  EV Ratio: {q1.parameters.ev_ratio}")
-    print(f"\nQuestion text:")
+    print(f"Option order: {q1.option_order}")
+    print("\nQuestion text:")
     print(q1.question_text)
     print(f"\nCorrect answer: {q1.correct_answer}")
 
@@ -424,15 +454,16 @@ if __name__ == "__main__":
     print(f"\nQuestion ID: {q2.question_id}")
     print(f"Template: {q2.template_type}")
     print(f"Correct choice: {q2.correct_choice}")
-    print(f"Parameters:")
+    print("Parameters:")
     print(f"  Safe payoff: ${q2.parameters.safe_payoff}")
+    print(f"  Distractor payoff: ${q2.parameters.distractor_payoff} (80% of safe)")
     print(f"  Win payoff: ${q2.parameters.win_payoff}")
     print(f"  Lose payoff: ${q2.parameters.lose_payoff}")
     print(f"  Probability: {q2.parameters.probability}")
-    print(f"  EV Safe: ${q2.parameters.ev_safe}")
     print(f"  EV Risky: ${q2.parameters.ev_risky}")
     print(f"  EV Ratio: {q2.parameters.ev_ratio}")
-    print(f"\nQuestion text:")
+    print(f"Option order: {q2.option_order}")
+    print("\nQuestion text:")
     print(q2.question_text)
     print(f"\nCorrect answer: {q2.correct_answer}")
 

@@ -1,26 +1,6 @@
 [
   {
     "question_id": "1",
-    "template_type": "grant",
-    "parameters": {
-      "safe_payoff": 1000,
-      "probability": 0.24,
-      "win_payoff": 2446,
-      "lose_payoff": 0,
-      "ev_ratio": 0.587,
-      "ev_safe": 1000,
-      "ev_risky": 587.04
-    },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 24% chance of receiving $2,446, 76% chance of receiving $0\n- Source B: Guaranteed funding of $1,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source B",
-    "safe_option_label": "Source B",
-    "risky_option_label": "Source A",
-    "safe_first": false,
-    "correct_choice": "safe",
-    "level": -3
-  },
-  {
-    "question_id": "2",
     "template_type": "investment",
     "parameters": {
       "safe_payoff": 5000,
@@ -28,119 +8,124 @@
       "win_payoff": 6716,
       "lose_payoff": 0,
       "ev_ratio": 0.587,
-      "ev_safe": 5000,
-      "ev_risky": 2934.89
+      "ev_risky": 2934.89,
+      "distractor_payoff": 4000
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 43.7% chance of returning $6,716, 56.3% chance of returning $0\n- Investment B: Guaranteed return of $5,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $4,000\n- Investment B: Guaranteed return of $5,000\n- Investment C: 43.7% chance of returning $6,716, 56.3% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
     "correct_answer": "Investment B",
     "safe_option_label": "Investment B",
-    "risky_option_label": "Investment A",
-    "safe_first": false,
+    "risky_option_label": "Investment C",
+    "distractor_option_label": "Investment A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
     "correct_choice": "safe",
-    "level": -3
+    "ev_ratio_level": -3
+  },
+  {
+    "question_id": "2",
+    "template_type": "business",
+    "parameters": {
+      "safe_payoff": 500,
+      "probability": 0.348,
+      "win_payoff": 767,
+      "lose_payoff": 0,
+      "ev_ratio": 0.534,
+      "ev_risky": 266.92,
+      "distractor_payoff": 400
+    },
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $500\n- Contract B: Certain payment of $400\n- Contract C: 34.8% probability of $767 payment, 65.2% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract A",
+    "safe_option_label": "Contract A",
+    "risky_option_label": "Contract C",
+    "distractor_option_label": "Contract B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -3
   },
   {
     "question_id": "3",
-    "template_type": "investment",
-    "parameters": {
-      "safe_payoff": 1000,
-      "probability": 0.284,
-      "win_payoff": 1979,
-      "lose_payoff": 0,
-      "ev_ratio": 0.562,
-      "ev_safe": 1000,
-      "ev_risky": 562.04
-    },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 28.4% chance of returning $1,979, 71.6% chance of returning $0\n- Investment B: Guaranteed return of $1,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment B",
-    "safe_option_label": "Investment B",
-    "risky_option_label": "Investment A",
-    "safe_first": false,
-    "correct_choice": "safe",
-    "level": -3
-  },
-  {
-    "question_id": "4",
     "template_type": "explicit_ev",
     "parameters": {
       "safe_payoff": 5000,
-      "probability": 0.739,
-      "win_payoff": 3451,
+      "probability": 0.417,
+      "win_payoff": 7194,
       "lose_payoff": 0,
-      "ev_ratio": 0.51,
-      "ev_safe": 5000,
-      "ev_risky": 2550.29
+      "ev_ratio": 0.6,
+      "ev_risky": 2999.9,
+      "distractor_payoff": 4000
     },
-    "question_text": "Consider these two options:\n- Option A: $5,000 with 100% certainty\n- Option B: 73.9% chance of $3,451, 26.1% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option A",
+    "question_text": "Consider these two options:\n- Option A: $4,000 with 100% certainty\n- Option B: 41.7% chance of $7,194, 58.3% chance of $0\n- Option C: $5,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option C",
     "risky_option_label": "Option B",
-    "safe_first": true,
+    "distractor_option_label": "Option A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -3
+    "ev_ratio_level": -3
+  },
+  {
+    "question_id": "4",
+    "template_type": "abstract",
+    "parameters": {
+      "safe_payoff": 100,
+      "probability": 0.717,
+      "win_payoff": 66,
+      "lose_payoff": 0,
+      "ev_ratio": 0.473,
+      "ev_risky": 47.32,
+      "distractor_payoff": 80
+    },
+    "question_text": "You must choose exactly one option:\n- Option A: Receive $80 with certainty\n- Option B: 71.7% chance of $66, 28.3% chance of $0\n- Option C: Receive $100 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -3
   },
   {
     "question_id": "5",
-    "template_type": "investment",
+    "template_type": "explicit_ev",
     "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.496,
-      "win_payoff": 11351,
+      "safe_payoff": 100,
+      "probability": 0.431,
+      "win_payoff": 125,
       "lose_payoff": 0,
-      "ev_ratio": 0.563,
-      "ev_safe": 10000,
-      "ev_risky": 5630.1
+      "ev_ratio": 0.539,
+      "ev_risky": 53.88,
+      "distractor_payoff": 80
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $10,000\n- Investment B: 49.6% chance of returning $11,351, 50.4% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment A",
-    "safe_option_label": "Investment A",
-    "risky_option_label": "Investment B",
-    "safe_first": true,
+    "question_text": "Consider these two options:\n- Option A: $100 with 100% certainty\n- Option B: $80 with 100% certainty\n- Option C: 43.1% chance of $125, 56.9% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option A",
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option C",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
     "correct_choice": "safe",
-    "level": -3
+    "ev_ratio_level": -3
   },
   {
     "question_id": "6",
-    "template_type": "investment",
-    "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.675,
-      "win_payoff": 380,
-      "lose_payoff": 0,
-      "ev_ratio": 0.513,
-      "ev_safe": 500,
-      "ev_risky": 256.5
-    },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $500\n- Investment B: 67.5% chance of returning $380, 32.5% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment A",
-    "safe_option_label": "Investment A",
-    "risky_option_label": "Investment B",
-    "safe_first": true,
-    "correct_choice": "safe",
-    "level": -3
-  },
-  {
-    "question_id": "7",
-    "template_type": "grant",
-    "parameters": {
-      "safe_payoff": 5000,
-      "probability": 0.558,
-      "win_payoff": 4659,
-      "lose_payoff": 0,
-      "ev_ratio": 0.52,
-      "ev_safe": 5000,
-      "ev_risky": 2599.72
-    },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 55.8% chance of receiving $4,659, 44.2% chance of receiving $0\n- Source B: Guaranteed funding of $5,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source B",
-    "safe_option_label": "Source B",
-    "risky_option_label": "Source A",
-    "safe_first": false,
-    "correct_choice": "safe",
-    "level": -3
-  },
-  {
-    "question_id": "8",
     "template_type": "explicit_ev",
     "parameters": {
       "safe_payoff": 100,
@@ -148,19 +133,24 @@
       "win_payoff": 77,
       "lose_payoff": 0,
       "ev_ratio": 0.467,
-      "ev_safe": 100,
-      "ev_risky": 46.82
+      "ev_risky": 46.82,
+      "distractor_payoff": 80
     },
-    "question_text": "Consider these two options:\n- Option A: 60.8% chance of $77, 39.2% chance of $0\n- Option B: $100 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
+    "question_text": "Consider these two options:\n- Option A: $100 with 100% certainty\n- Option B: 60.8% chance of $77, 39.2% chance of $0\n- Option C: $80 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option A",
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
     "correct_choice": "safe",
-    "level": -3
+    "ev_ratio_level": -3
   },
   {
-    "question_id": "9",
+    "question_id": "7",
     "template_type": "business",
     "parameters": {
       "safe_payoff": 100,
@@ -168,99 +158,99 @@
       "win_payoff": 126,
       "lose_payoff": 0,
       "ev_ratio": 0.474,
-      "ev_safe": 100,
-      "ev_risky": 47.38
+      "ev_risky": 47.38,
+      "distractor_payoff": 80
     },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $100\n- Contract B: 37.6% probability of $126 payment, 62.4% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract A",
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $80\n- Contract B: 37.6% probability of $126 payment, 62.4% probability of $0\n- Contract C: Certain payment of $100\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract C",
+    "safe_option_label": "Contract C",
     "risky_option_label": "Contract B",
-    "safe_first": true,
+    "distractor_option_label": "Contract A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -3
+    "ev_ratio_level": -3
   },
   {
-    "question_id": "10",
-    "template_type": "business",
+    "question_id": "8",
+    "template_type": "explicit_ev",
     "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.657,
-      "win_payoff": 8006,
+      "safe_payoff": 500,
+      "probability": 0.505,
+      "win_payoff": 461,
       "lose_payoff": 0,
-      "ev_ratio": 0.526,
-      "ev_safe": 10000,
-      "ev_risky": 5259.94
+      "ev_ratio": 0.466,
+      "ev_risky": 232.81,
+      "distractor_payoff": 400
     },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $10,000\n- Contract B: 65.7% probability of $8,006 payment, 34.3% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract A",
-    "risky_option_label": "Contract B",
-    "safe_first": true,
+    "question_text": "Consider these two options:\n- Option A: $500 with 100% certainty\n- Option B: 50.5% chance of $461, 49.5% chance of $0\n- Option C: $400 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option A",
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
     "correct_choice": "safe",
-    "level": -3
+    "ev_ratio_level": -3
   },
   {
-    "question_id": "11",
-    "template_type": "business",
-    "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.565,
-      "win_payoff": 11168,
-      "lose_payoff": 0,
-      "ev_ratio": 0.631,
-      "ev_safe": 10000,
-      "ev_risky": 6309.92
-    },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $10,000\n- Contract B: 56.5% probability of $11,168 payment, 43.5% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract A",
-    "risky_option_label": "Contract B",
-    "safe_first": true,
-    "correct_choice": "safe",
-    "level": -2
-  },
-  {
-    "question_id": "12",
+    "question_id": "9",
     "template_type": "explicit_ev",
     "parameters": {
       "safe_payoff": 10000,
-      "probability": 0.751,
-      "win_payoff": 9587,
+      "probability": 0.319,
+      "win_payoff": 15862,
       "lose_payoff": 0,
-      "ev_ratio": 0.72,
-      "ev_safe": 10000,
-      "ev_risky": 7199.84
+      "ev_ratio": 0.506,
+      "ev_risky": 5059.98,
+      "distractor_payoff": 8000
     },
-    "question_text": "Consider these two options:\n- Option A: 75.1% chance of $9,587, 24.9% chance of $0\n- Option B: $10,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option B",
+    "question_text": "Consider these two options:\n- Option A: 31.9% chance of $15,862, 68.1% chance of $0\n- Option B: $8,000 with 100% certainty\n- Option C: $10,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option C",
     "risky_option_label": "Option A",
-    "safe_first": false,
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -2
+    "ev_ratio_level": -3
   },
   {
-    "question_id": "13",
-    "template_type": "abstract",
+    "question_id": "10",
+    "template_type": "explicit_ev",
     "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.757,
-      "win_payoff": 103,
+      "safe_payoff": 1000,
+      "probability": 0.493,
+      "win_payoff": 947,
       "lose_payoff": 0,
-      "ev_ratio": 0.776,
-      "ev_safe": 100,
-      "ev_risky": 77.97
+      "ev_ratio": 0.467,
+      "ev_risky": 466.87,
+      "distractor_payoff": 800
     },
-    "question_text": "You must choose exactly one option:\n- Option A: 75.7% chance of $103, 24.3% chance of $0\n- Option B: Receive $100 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
+    "question_text": "Consider these two options:\n- Option A: $1,000 with 100% certainty\n- Option B: $800 with 100% certainty\n- Option C: 49.3% chance of $947, 50.7% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option A",
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option C",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
     "correct_choice": "safe",
-    "level": -2
+    "ev_ratio_level": -3
   },
   {
-    "question_id": "14",
+    "question_id": "11",
     "template_type": "investment",
     "parameters": {
       "safe_payoff": 100,
@@ -268,59 +258,74 @@
       "win_payoff": 207,
       "lose_payoff": 0,
       "ev_ratio": 0.713,
-      "ev_safe": 100,
-      "ev_risky": 71.41
+      "ev_risky": 71.41,
+      "distractor_payoff": 80
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $100\n- Investment B: 34.5% chance of returning $207, 65.5% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment A",
-    "safe_option_label": "Investment A",
-    "risky_option_label": "Investment B",
-    "safe_first": true,
-    "correct_choice": "safe",
-    "level": -2
-  },
-  {
-    "question_id": "15",
-    "template_type": "abstract",
-    "parameters": {
-      "safe_payoff": 5000,
-      "probability": 0.69,
-      "win_payoff": 5768,
-      "lose_payoff": 0,
-      "ev_ratio": 0.796,
-      "ev_safe": 5000,
-      "ev_risky": 3979.92
-    },
-    "question_text": "You must choose exactly one option:\n- Option A: Receive $5,000 with certainty\n- Option B: 69% chance of $5,768, 31.0% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
-    "correct_choice": "safe",
-    "level": -2
-  },
-  {
-    "question_id": "16",
-    "template_type": "investment",
-    "parameters": {
-      "safe_payoff": 5000,
-      "probability": 0.768,
-      "win_payoff": 4121,
-      "lose_payoff": 0,
-      "ev_ratio": 0.633,
-      "ev_safe": 5000,
-      "ev_risky": 3164.93
-    },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 76.8% chance of returning $4,121, 23.2% chance of returning $0\n- Investment B: Guaranteed return of $5,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment B",
-    "safe_option_label": "Investment B",
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 34.5% chance of returning $207, 65.5% chance of returning $0\n- Investment B: Guaranteed return of $80\n- Investment C: Guaranteed return of $100\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment C",
+    "safe_option_label": "Investment C",
     "risky_option_label": "Investment A",
-    "safe_first": false,
+    "distractor_option_label": "Investment B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -2
+    "ev_ratio_level": -2
   },
   {
-    "question_id": "17",
+    "question_id": "12",
+    "template_type": "grant",
+    "parameters": {
+      "safe_payoff": 100,
+      "probability": 0.787,
+      "win_payoff": 90,
+      "lose_payoff": 0,
+      "ev_ratio": 0.707,
+      "ev_risky": 70.83,
+      "distractor_payoff": 80
+    },
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 78.7% chance of receiving $90, 21.3% chance of receiving $0\n- Source B: Guaranteed funding of $80\n- Source C: Guaranteed funding of $100\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source C",
+    "safe_option_label": "Source C",
+    "risky_option_label": "Source A",
+    "distractor_option_label": "Source B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -2
+  },
+  {
+    "question_id": "13",
+    "template_type": "grant",
+    "parameters": {
+      "safe_payoff": 10000,
+      "probability": 0.299,
+      "win_payoff": 23612,
+      "lose_payoff": 0,
+      "ev_ratio": 0.706,
+      "ev_risky": 7059.99,
+      "distractor_payoff": 8000
+    },
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $10,000\n- Source B: 29.9% chance of receiving $23,612, 70.1% chance of receiving $0\n- Source C: Guaranteed funding of $8,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source A",
+    "safe_option_label": "Source A",
+    "risky_option_label": "Source B",
+    "distractor_option_label": "Source C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -2
+  },
+  {
+    "question_id": "14",
     "template_type": "investment",
     "parameters": {
       "safe_payoff": 10000,
@@ -328,19 +333,24 @@
       "win_payoff": 11302,
       "lose_payoff": 0,
       "ev_ratio": 0.738,
-      "ev_safe": 10000,
-      "ev_risky": 7380.21
+      "ev_risky": 7380.21,
+      "distractor_payoff": 8000
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 65.3% chance of returning $11,302, 34.7% chance of returning $0\n- Investment B: Guaranteed return of $10,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment B",
-    "safe_option_label": "Investment B",
-    "risky_option_label": "Investment A",
-    "safe_first": false,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $10,000\n- Investment B: 65.3% chance of returning $11,302, 34.7% chance of returning $0\n- Investment C: Guaranteed return of $8,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment A",
+    "safe_option_label": "Investment A",
+    "risky_option_label": "Investment B",
+    "distractor_option_label": "Investment C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
     "correct_choice": "safe",
-    "level": -2
+    "ev_ratio_level": -2
   },
   {
-    "question_id": "18",
+    "question_id": "15",
     "template_type": "grant",
     "parameters": {
       "safe_payoff": 1000,
@@ -348,159 +358,174 @@
       "win_payoff": 1521,
       "lose_payoff": 0,
       "ev_ratio": 0.704,
-      "ev_safe": 1000,
-      "ev_risky": 704.22
+      "ev_risky": 704.22,
+      "distractor_payoff": 800
     },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $1,000\n- Source B: 46.3% chance of receiving $1,521, 53.7% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source A",
-    "safe_option_label": "Source A",
-    "risky_option_label": "Source B",
-    "safe_first": true,
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 46.3% chance of receiving $1,521, 53.7% chance of receiving $0\n- Source B: Guaranteed funding of $800\n- Source C: Guaranteed funding of $1,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source C",
+    "safe_option_label": "Source C",
+    "risky_option_label": "Source A",
+    "distractor_option_label": "Source B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -2
+    "ev_ratio_level": -2
+  },
+  {
+    "question_id": "16",
+    "template_type": "investment",
+    "parameters": {
+      "safe_payoff": 100,
+      "probability": 0.403,
+      "win_payoff": 178,
+      "lose_payoff": 0,
+      "ev_ratio": 0.718,
+      "ev_risky": 71.73,
+      "distractor_payoff": 80
+    },
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 40.3% chance of returning $178, 59.7% chance of returning $0\n- Investment B: Guaranteed return of $80\n- Investment C: Guaranteed return of $100\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment C",
+    "safe_option_label": "Investment C",
+    "risky_option_label": "Investment A",
+    "distractor_option_label": "Investment B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -2
+  },
+  {
+    "question_id": "17",
+    "template_type": "abstract",
+    "parameters": {
+      "safe_payoff": 100,
+      "probability": 0.625,
+      "win_payoff": 98,
+      "lose_payoff": 0,
+      "ev_ratio": 0.612,
+      "ev_risky": 61.25,
+      "distractor_payoff": 80
+    },
+    "question_text": "You must choose exactly one option:\n- Option A: 62.5% chance of $98, 37.5% chance of $0\n- Option B: Receive $80 with certainty\n- Option C: Receive $100 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option A",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -2
+  },
+  {
+    "question_id": "18",
+    "template_type": "business",
+    "parameters": {
+      "safe_payoff": 100,
+      "probability": 0.508,
+      "win_payoff": 129,
+      "lose_payoff": 0,
+      "ev_ratio": 0.656,
+      "ev_risky": 65.53,
+      "distractor_payoff": 80
+    },
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $80\n- Contract B: Certain payment of $100\n- Contract C: 50.8% probability of $129 payment, 49.2% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract B",
+    "safe_option_label": "Contract B",
+    "risky_option_label": "Contract C",
+    "distractor_option_label": "Contract A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -2
   },
   {
     "question_id": "19",
-    "template_type": "investment",
+    "template_type": "explicit_ev",
     "parameters": {
       "safe_payoff": 500,
-      "probability": 0.238,
-      "win_payoff": 1269,
+      "probability": 0.634,
+      "win_payoff": 612,
       "lose_payoff": 0,
-      "ev_ratio": 0.604,
-      "ev_safe": 500,
-      "ev_risky": 302.02
+      "ev_ratio": 0.776,
+      "ev_risky": 388.01,
+      "distractor_payoff": 400
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $500\n- Investment B: 23.8% chance of returning $1,269, 76.2% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment A",
-    "safe_option_label": "Investment A",
-    "risky_option_label": "Investment B",
-    "safe_first": true,
+    "question_text": "Consider these two options:\n- Option A: $500 with 100% certainty\n- Option B: 63.4% chance of $612, 36.6% chance of $0\n- Option C: $400 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option A",
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
     "correct_choice": "safe",
-    "level": -2
+    "ev_ratio_level": -2
   },
   {
     "question_id": "20",
-    "template_type": "explicit_ev",
+    "template_type": "investment",
     "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.204,
-      "win_payoff": 1819,
+      "safe_payoff": 5000,
+      "probability": 0.684,
+      "win_payoff": 4664,
       "lose_payoff": 0,
-      "ev_ratio": 0.742,
-      "ev_safe": 500,
-      "ev_risky": 371.08
+      "ev_ratio": 0.638,
+      "ev_risky": 3190.18,
+      "distractor_payoff": 4000
     },
-    "question_text": "Consider these two options:\n- Option A: $500 with 100% certainty\n- Option B: 20.4% chance of $1,819, 79.6% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $4,000\n- Investment B: 68.4% chance of returning $4,664, 31.6% chance of returning $0\n- Investment C: Guaranteed return of $5,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment C",
+    "safe_option_label": "Investment C",
+    "risky_option_label": "Investment B",
+    "distractor_option_label": "Investment A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -2
+    "ev_ratio_level": -2
   },
   {
     "question_id": "21",
-    "template_type": "investment",
+    "template_type": "business",
     "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.743,
-      "win_payoff": 125,
+      "safe_payoff": 5000,
+      "probability": 0.447,
+      "win_payoff": 10403,
       "lose_payoff": 0,
-      "ev_ratio": 0.929,
-      "ev_safe": 100,
-      "ev_risky": 92.88
+      "ev_ratio": 0.93,
+      "ev_risky": 4650.14,
+      "distractor_payoff": 4000
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $100\n- Investment B: 74.3% chance of returning $125, 25.7% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment A",
-    "safe_option_label": "Investment A",
-    "risky_option_label": "Investment B",
-    "safe_first": true,
+    "question_text": "Your company must choose between two contracts:\n- Contract A: 44.7% probability of $10,403 payment, 55.3% probability of $0\n- Contract B: Certain payment of $4,000\n- Contract C: Certain payment of $5,000\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract C",
+    "safe_option_label": "Contract C",
+    "risky_option_label": "Contract A",
+    "distractor_option_label": "Contract B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -1
+    "ev_ratio_level": -1
   },
   {
     "question_id": "22",
-    "template_type": "explicit_ev",
-    "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.367,
-      "win_payoff": 1189,
-      "lose_payoff": 0,
-      "ev_ratio": 0.873,
-      "ev_safe": 500,
-      "ev_risky": 436.36
-    },
-    "question_text": "Consider these two options:\n- Option A: $500 with 100% certainty\n- Option B: 36.7% chance of $1,189, 63.3% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
-    "correct_choice": "safe",
-    "level": -1
-  },
-  {
-    "question_id": "23",
-    "template_type": "explicit_ev",
-    "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.484,
-      "win_payoff": 18967,
-      "lose_payoff": 0,
-      "ev_ratio": 0.918,
-      "ev_safe": 10000,
-      "ev_risky": 9180.03
-    },
-    "question_text": "Consider these two options:\n- Option A: 48.4% chance of $18,967, 51.6% chance of $0\n- Option B: $10,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
-    "correct_choice": "safe",
-    "level": -1
-  },
-  {
-    "question_id": "24",
-    "template_type": "investment",
-    "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.258,
-      "win_payoff": 335,
-      "lose_payoff": 0,
-      "ev_ratio": 0.865,
-      "ev_safe": 100,
-      "ev_risky": 86.43
-    },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 25.8% chance of returning $335, 74.2% chance of returning $0\n- Investment B: Guaranteed return of $100\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment B",
-    "safe_option_label": "Investment B",
-    "risky_option_label": "Investment A",
-    "safe_first": false,
-    "correct_choice": "safe",
-    "level": -1
-  },
-  {
-    "question_id": "25",
-    "template_type": "grant",
-    "parameters": {
-      "safe_payoff": 5000,
-      "probability": 0.718,
-      "win_payoff": 5627,
-      "lose_payoff": 0,
-      "ev_ratio": 0.808,
-      "ev_safe": 5000,
-      "ev_risky": 4040.19
-    },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $5,000\n- Source B: 71.8% chance of receiving $5,627, 28.2% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source A",
-    "safe_option_label": "Source A",
-    "risky_option_label": "Source B",
-    "safe_first": true,
-    "correct_choice": "safe",
-    "level": -1
-  },
-  {
-    "question_id": "26",
     "template_type": "abstract",
     "parameters": {
       "safe_payoff": 5000,
@@ -508,179 +533,224 @@
       "win_payoff": 7221,
       "lose_payoff": 0,
       "ev_ratio": 0.92,
-      "ev_safe": 5000,
-      "ev_risky": 4599.78
+      "ev_risky": 4599.78,
+      "distractor_payoff": 4000
     },
-    "question_text": "You must choose exactly one option:\n- Option A: Receive $5,000 with certainty\n- Option B: 63.7% chance of $7,221, 36.3% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
+    "question_text": "You must choose exactly one option:\n- Option A: 63.7% chance of $7,221, 36.3% chance of $0\n- Option B: Receive $4,000 with certainty\n- Option C: Receive $5,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option A",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -1
+    "ev_ratio_level": -1
   },
   {
-    "question_id": "27",
+    "question_id": "23",
     "template_type": "investment",
     "parameters": {
       "safe_payoff": 500,
-      "probability": 0.314,
-      "win_payoff": 1381,
+      "probability": 0.522,
+      "win_payoff": 786,
       "lose_payoff": 0,
-      "ev_ratio": 0.867,
-      "ev_safe": 500,
-      "ev_risky": 433.63
+      "ev_ratio": 0.821,
+      "ev_risky": 410.29,
+      "distractor_payoff": 400
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 31.4% chance of returning $1,381, 68.6% chance of returning $0\n- Investment B: Guaranteed return of $500\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment B",
-    "safe_option_label": "Investment B",
-    "risky_option_label": "Investment A",
-    "safe_first": false,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $400\n- Investment B: 52.2% chance of returning $786, 47.8% chance of returning $0\n- Investment C: Guaranteed return of $500\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment C",
+    "safe_option_label": "Investment C",
+    "risky_option_label": "Investment B",
+    "distractor_option_label": "Investment A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -1
+    "ev_ratio_level": -1
+  },
+  {
+    "question_id": "24",
+    "template_type": "grant",
+    "parameters": {
+      "safe_payoff": 500,
+      "probability": 0.725,
+      "win_payoff": 559,
+      "lose_payoff": 0,
+      "ev_ratio": 0.811,
+      "ev_risky": 405.27,
+      "distractor_payoff": 400
+    },
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 72.5% chance of receiving $559, 27.5% chance of receiving $0\n- Source B: Guaranteed funding of $500\n- Source C: Guaranteed funding of $400\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source B",
+    "safe_option_label": "Source B",
+    "risky_option_label": "Source A",
+    "distractor_option_label": "Source C",
+    "option_order": [
+      "risky",
+      "safe",
+      "distractor"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -1
+  },
+  {
+    "question_id": "25",
+    "template_type": "abstract",
+    "parameters": {
+      "safe_payoff": 10000,
+      "probability": 0.702,
+      "win_payoff": 13462,
+      "lose_payoff": 0,
+      "ev_ratio": 0.945,
+      "ev_risky": 9450.32,
+      "distractor_payoff": 8000
+    },
+    "question_text": "You must choose exactly one option:\n- Option A: 70.2% chance of $13,462, 29.8% chance of $0\n- Option B: Receive $8,000 with certainty\n- Option C: Receive $10,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option A",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -1
+  },
+  {
+    "question_id": "26",
+    "template_type": "grant",
+    "parameters": {
+      "safe_payoff": 5000,
+      "probability": 0.489,
+      "win_payoff": 9509,
+      "lose_payoff": 0,
+      "ev_ratio": 0.93,
+      "ev_risky": 4649.9,
+      "distractor_payoff": 4000
+    },
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 48.9% chance of receiving $9,509, 51.1% chance of receiving $0\n- Source B: Guaranteed funding of $4,000\n- Source C: Guaranteed funding of $5,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source C",
+    "safe_option_label": "Source C",
+    "risky_option_label": "Source A",
+    "distractor_option_label": "Source B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -1
+  },
+  {
+    "question_id": "27",
+    "template_type": "grant",
+    "parameters": {
+      "safe_payoff": 100,
+      "probability": 0.791,
+      "win_payoff": 106,
+      "lose_payoff": 0,
+      "ev_ratio": 0.84,
+      "ev_risky": 83.85,
+      "distractor_payoff": 80
+    },
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $100\n- Source B: Guaranteed funding of $80\n- Source C: 79.1% chance of receiving $106, 20.9% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source A",
+    "safe_option_label": "Source A",
+    "risky_option_label": "Source C",
+    "distractor_option_label": "Source B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -1
   },
   {
     "question_id": "28",
-    "template_type": "investment",
-    "parameters": {
-      "safe_payoff": 1000,
-      "probability": 0.478,
-      "win_payoff": 1948,
-      "lose_payoff": 0,
-      "ev_ratio": 0.931,
-      "ev_safe": 1000,
-      "ev_risky": 931.14
-    },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $1,000\n- Investment B: 47.8% chance of returning $1,948, 52.2% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment A",
-    "safe_option_label": "Investment A",
-    "risky_option_label": "Investment B",
-    "safe_first": true,
-    "correct_choice": "safe",
-    "level": -1
-  },
-  {
-    "question_id": "29",
     "template_type": "grant",
     "parameters": {
       "safe_payoff": 10000,
-      "probability": 0.259,
-      "win_payoff": 34672,
+      "probability": 0.597,
+      "win_payoff": 14623,
       "lose_payoff": 0,
-      "ev_ratio": 0.898,
-      "ev_safe": 10000,
-      "ev_risky": 8980.05
+      "ev_ratio": 0.873,
+      "ev_risky": 8729.93,
+      "distractor_payoff": 8000
     },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $10,000\n- Source B: 25.9% chance of receiving $34,672, 74.1% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source A",
-    "safe_option_label": "Source A",
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $8,000\n- Source B: 59.7% chance of receiving $14,623, 40.3% chance of receiving $0\n- Source C: Guaranteed funding of $10,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source C",
+    "safe_option_label": "Source C",
     "risky_option_label": "Source B",
-    "safe_first": true,
+    "distractor_option_label": "Source A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "safe",
-    "level": -1
+    "ev_ratio_level": -1
+  },
+  {
+    "question_id": "29",
+    "template_type": "investment",
+    "parameters": {
+      "safe_payoff": 100,
+      "probability": 0.548,
+      "win_payoff": 161,
+      "lose_payoff": 0,
+      "ev_ratio": 0.881,
+      "ev_risky": 88.23,
+      "distractor_payoff": 80
+    },
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $100\n- Investment B: 54.8% chance of returning $161, 45.2% chance of returning $0\n- Investment C: Guaranteed return of $80\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment A",
+    "safe_option_label": "Investment A",
+    "risky_option_label": "Investment B",
+    "distractor_option_label": "Investment C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": -1
   },
   {
     "question_id": "30",
     "template_type": "abstract",
     "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.3,
-      "win_payoff": 1455,
+      "safe_payoff": 100,
+      "probability": 0.551,
+      "win_payoff": 159,
       "lose_payoff": 0,
-      "ev_ratio": 0.873,
-      "ev_safe": 500,
-      "ev_risky": 436.5
+      "ev_ratio": 0.875,
+      "ev_risky": 87.61,
+      "distractor_payoff": 80
     },
-    "question_text": "You must choose exactly one option:\n- Option A: Receive $500 with certainty\n- Option B: 30% chance of $1,455, 70% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
+    "question_text": "You must choose exactly one option:\n- Option A: 55.1% chance of $159, 44.9% chance of $0\n- Option B: Receive $100 with certainty\n- Option C: Receive $80 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option B",
+    "safe_option_label": "Option B",
+    "risky_option_label": "Option A",
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "risky",
+      "safe",
+      "distractor"
+    ],
     "correct_choice": "safe",
-    "level": -1
+    "ev_ratio_level": -1
   },
   {
     "question_id": "31",
-    "template_type": "grant",
-    "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.299,
-      "win_payoff": 318,
-      "lose_payoff": 0,
-      "ev_ratio": 0.95,
-      "ev_safe": 100,
-      "ev_risky": 95.08
-    },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 29.9% chance of receiving $318, 70.1% chance of receiving $0\n- Source B: Guaranteed funding of $100\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source B",
-    "safe_option_label": "Source B",
-    "risky_option_label": "Source A",
-    "safe_first": false,
-    "correct_choice": "safe",
-    "level": 0
-  },
-  {
-    "question_id": "32",
-    "template_type": "business",
-    "parameters": {
-      "safe_payoff": 5000,
-      "probability": 0.371,
-      "win_payoff": 13747,
-      "lose_payoff": 0,
-      "ev_ratio": 1.02,
-      "ev_safe": 5000,
-      "ev_risky": 5100.14
-    },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: 37.1% probability of $13,747 payment, 62.9% probability of $0\n- Contract B: Certain payment of $5,000\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract B",
-    "risky_option_label": "Contract A",
-    "safe_first": false,
-    "correct_choice": "risky",
-    "level": 0
-  },
-  {
-    "question_id": "33",
-    "template_type": "investment",
-    "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.378,
-      "win_payoff": 1385,
-      "lose_payoff": 0,
-      "ev_ratio": 1.047,
-      "ev_safe": 500,
-      "ev_risky": 523.53
-    },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $500\n- Investment B: 37.8% chance of returning $1,385, 62.2% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment B",
-    "safe_option_label": "Investment A",
-    "risky_option_label": "Investment B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 0
-  },
-  {
-    "question_id": "34",
-    "template_type": "business",
-    "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.23,
-      "win_payoff": 434,
-      "lose_payoff": 0,
-      "ev_ratio": 0.998,
-      "ev_safe": 100,
-      "ev_risky": 99.82
-    },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $100\n- Contract B: 23% probability of $434 payment, 77% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract A",
-    "risky_option_label": "Contract B",
-    "safe_first": true,
-    "correct_choice": "safe",
-    "level": 0
-  },
-  {
-    "question_id": "35",
     "template_type": "abstract",
     "parameters": {
       "safe_payoff": 10000,
@@ -688,19 +758,24 @@
       "win_payoff": 39073,
       "lose_payoff": 0,
       "ev_ratio": 0.969,
-      "ev_safe": 10000,
-      "ev_risky": 9690.1
+      "ev_risky": 9690.1,
+      "distractor_payoff": 8000
     },
-    "question_text": "You must choose exactly one option:\n- Option A: Receive $10,000 with certainty\n- Option B: 24.8% chance of $39,073, 75.2% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
+    "question_text": "You must choose exactly one option:\n- Option A: 24.8% chance of $39,073, 75.2% chance of $0\n- Option B: Receive $10,000 with certainty\n- Option C: Receive $8,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option B",
+    "safe_option_label": "Option B",
+    "risky_option_label": "Option A",
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "risky",
+      "safe",
+      "distractor"
+    ],
     "correct_choice": "safe",
-    "level": 0
+    "ev_ratio_level": 0
   },
   {
-    "question_id": "36",
+    "question_id": "32",
     "template_type": "investment",
     "parameters": {
       "safe_payoff": 5000,
@@ -708,39 +783,49 @@
       "win_payoff": 19099,
       "lose_payoff": 0,
       "ev_ratio": 1.039,
-      "ev_safe": 5000,
-      "ev_risky": 5194.93
+      "ev_risky": 5194.93,
+      "distractor_payoff": 4000
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $5,000\n- Investment B: 27.2% chance of returning $19,099, 72.8% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment B",
-    "safe_option_label": "Investment A",
-    "risky_option_label": "Investment B",
-    "safe_first": true,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 27.2% chance of returning $19,099, 72.8% chance of returning $0\n- Investment B: Guaranteed return of $4,000\n- Investment C: Guaranteed return of $5,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment A",
+    "safe_option_label": "Investment C",
+    "risky_option_label": "Investment A",
+    "distractor_option_label": "Investment B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
     "correct_choice": "risky",
-    "level": 0
+    "ev_ratio_level": 0
   },
   {
-    "question_id": "37",
+    "question_id": "33",
     "template_type": "explicit_ev",
     "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.224,
-      "win_payoff": 42768,
+      "safe_payoff": 100,
+      "probability": 0.452,
+      "win_payoff": 223,
       "lose_payoff": 0,
-      "ev_ratio": 0.958,
-      "ev_safe": 10000,
-      "ev_risky": 9580.03
+      "ev_ratio": 1.008,
+      "ev_risky": 100.8,
+      "distractor_payoff": 80
     },
-    "question_text": "Consider these two options:\n- Option A: 22.4% chance of $42,768, 77.6% chance of $0\n- Option B: $10,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
+    "question_text": "Consider these two options:\n- Option A: $100 with 100% certainty\n- Option B: 45.2% chance of $223, 54.8% chance of $0\n- Option C: $80 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
     "correct_answer": "Option B",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
-    "correct_choice": "safe",
-    "level": 0
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 0
   },
   {
-    "question_id": "38",
+    "question_id": "34",
     "template_type": "business",
     "parameters": {
       "safe_payoff": 500,
@@ -748,139 +833,174 @@
       "win_payoff": 815,
       "lose_payoff": 0,
       "ev_ratio": 0.981,
-      "ev_safe": 500,
-      "ev_risky": 490.63
+      "ev_risky": 490.63,
+      "distractor_payoff": 400
     },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: 60.2% probability of $815 payment, 39.8% probability of $0\n- Contract B: Certain payment of $500\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract B",
-    "safe_option_label": "Contract B",
-    "risky_option_label": "Contract A",
-    "safe_first": false,
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $500\n- Contract B: Certain payment of $400\n- Contract C: 60.2% probability of $815 payment, 39.8% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract A",
+    "safe_option_label": "Contract A",
+    "risky_option_label": "Contract C",
+    "distractor_option_label": "Contract B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
     "correct_choice": "safe",
-    "level": 0
+    "ev_ratio_level": 0
+  },
+  {
+    "question_id": "35",
+    "template_type": "investment",
+    "parameters": {
+      "safe_payoff": 1000,
+      "probability": 0.474,
+      "win_payoff": 2200,
+      "lose_payoff": 0,
+      "ev_ratio": 1.043,
+      "ev_risky": 1042.8,
+      "distractor_payoff": 800
+    },
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 47.4% chance of returning $2,200, 52.6% chance of returning $0\n- Investment B: Guaranteed return of $800\n- Investment C: Guaranteed return of $1,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment A",
+    "safe_option_label": "Investment C",
+    "risky_option_label": "Investment A",
+    "distractor_option_label": "Investment B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 0
+  },
+  {
+    "question_id": "36",
+    "template_type": "grant",
+    "parameters": {
+      "safe_payoff": 10000,
+      "probability": 0.799,
+      "win_payoff": 13141,
+      "lose_payoff": 0,
+      "ev_ratio": 1.05,
+      "ev_risky": 10499.66,
+      "distractor_payoff": 8000
+    },
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 79.9% chance of receiving $13,141, 20.1% chance of receiving $0\n- Source B: Guaranteed funding of $8,000\n- Source C: Guaranteed funding of $10,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source A",
+    "safe_option_label": "Source C",
+    "risky_option_label": "Source A",
+    "distractor_option_label": "Source B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 0
+  },
+  {
+    "question_id": "37",
+    "template_type": "explicit_ev",
+    "parameters": {
+      "safe_payoff": 1000,
+      "probability": 0.279,
+      "win_payoff": 3530,
+      "lose_payoff": 0,
+      "ev_ratio": 0.985,
+      "ev_risky": 984.87,
+      "distractor_payoff": 800
+    },
+    "question_text": "Consider these two options:\n- Option A: 27.9% chance of $3,530, 72.1% chance of $0\n- Option B: $800 with 100% certainty\n- Option C: $1,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option A",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": 0
+  },
+  {
+    "question_id": "38",
+    "template_type": "business",
+    "parameters": {
+      "safe_payoff": 1000,
+      "probability": 0.295,
+      "win_payoff": 3502,
+      "lose_payoff": 0,
+      "ev_ratio": 1.033,
+      "ev_risky": 1033.09,
+      "distractor_payoff": 800
+    },
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $1,000\n- Contract B: 29.5% probability of $3,502 payment, 70.5% probability of $0\n- Contract C: Certain payment of $800\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract B",
+    "safe_option_label": "Contract A",
+    "risky_option_label": "Contract B",
+    "distractor_option_label": "Contract C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 0
   },
   {
     "question_id": "39",
-    "template_type": "grant",
-    "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.603,
-      "win_payoff": 813,
-      "lose_payoff": 0,
-      "ev_ratio": 0.98,
-      "ev_safe": 500,
-      "ev_risky": 490.24
-    },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 60.3% chance of receiving $813, 39.7% chance of receiving $0\n- Source B: Guaranteed funding of $500\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source B",
-    "safe_option_label": "Source B",
-    "risky_option_label": "Source A",
-    "safe_first": false,
-    "correct_choice": "safe",
-    "level": 0
-  },
-  {
-    "question_id": "40",
-    "template_type": "abstract",
-    "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.475,
-      "win_payoff": 221,
-      "lose_payoff": 0,
-      "ev_ratio": 1.05,
-      "ev_safe": 100,
-      "ev_risky": 104.97
-    },
-    "question_text": "You must choose exactly one option:\n- Option A: Receive $100 with certainty\n- Option B: 47.5% chance of $221, 52.5% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 0
-  },
-  {
-    "question_id": "41",
-    "template_type": "abstract",
-    "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.328,
-      "win_payoff": 33628,
-      "lose_payoff": 0,
-      "ev_ratio": 1.103,
-      "ev_safe": 10000,
-      "ev_risky": 11029.98
-    },
-    "question_text": "You must choose exactly one option:\n- Option A: 32.8% chance of $33,628, 67.2% chance of $0\n- Option B: Receive $10,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
-    "correct_choice": "risky",
-    "level": 1
-  },
-  {
-    "question_id": "42",
-    "template_type": "abstract",
-    "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.422,
-      "win_payoff": 1282,
-      "lose_payoff": 0,
-      "ev_ratio": 1.082,
-      "ev_safe": 500,
-      "ev_risky": 541.0
-    },
-    "question_text": "You must choose exactly one option:\n- Option A: 42.2% chance of $1,282, 57.8% chance of $0\n- Option B: Receive $500 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
-    "correct_choice": "risky",
-    "level": 1
-  },
-  {
-    "question_id": "43",
     "template_type": "explicit_ev",
     "parameters": {
       "safe_payoff": 10000,
       "probability": 0.205,
-      "win_payoff": 59171,
+      "win_payoff": 50341,
       "lose_payoff": 0,
-      "ev_ratio": 1.213,
-      "ev_safe": 10000,
-      "ev_risky": 12130.05
+      "ev_ratio": 1.032,
+      "ev_risky": 10319.9,
+      "distractor_payoff": 8000
     },
-    "question_text": "Consider these two options:\n- Option A: 20.5% chance of $59,171, 79.5% chance of $0\n- Option B: $10,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
+    "question_text": "Consider these two options:\n- Option A: $8,000 with 100% certainty\n- Option B: $10,000 with 100% certainty\n- Option C: 20.5% chance of $50,341, 79.5% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
     "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
+    "risky_option_label": "Option C",
+    "distractor_option_label": "Option A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
     "correct_choice": "risky",
-    "level": 1
+    "ev_ratio_level": 0
   },
   {
-    "question_id": "44",
-    "template_type": "abstract",
+    "question_id": "40",
+    "template_type": "investment",
     "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.359,
-      "win_payoff": 1710,
+      "safe_payoff": 1000,
+      "probability": 0.269,
+      "win_payoff": 3572,
       "lose_payoff": 0,
-      "ev_ratio": 1.228,
-      "ev_safe": 500,
-      "ev_risky": 613.89
+      "ev_ratio": 0.961,
+      "ev_risky": 960.87,
+      "distractor_payoff": 800
     },
-    "question_text": "You must choose exactly one option:\n- Option A: Receive $500 with certainty\n- Option B: 35.9% chance of $1,710, 64.1% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 1
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 26.9% chance of returning $3,572, 73.1% chance of returning $0\n- Investment B: Guaranteed return of $1,000\n- Investment C: Guaranteed return of $800\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment B",
+    "safe_option_label": "Investment B",
+    "risky_option_label": "Investment A",
+    "distractor_option_label": "Investment C",
+    "option_order": [
+      "risky",
+      "safe",
+      "distractor"
+    ],
+    "correct_choice": "safe",
+    "ev_ratio_level": 0
   },
   {
-    "question_id": "45",
+    "question_id": "41",
     "template_type": "business",
     "parameters": {
       "safe_payoff": 1000,
@@ -888,515 +1008,745 @@
       "win_payoff": 2121,
       "lose_payoff": 0,
       "ev_ratio": 1.194,
-      "ev_safe": 1000,
-      "ev_risky": 1194.12
+      "ev_risky": 1194.12,
+      "distractor_payoff": 800
     },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $1,000\n- Contract B: 56.3% probability of $2,121 payment, 43.7% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $800\n- Contract B: 56.3% probability of $2,121 payment, 43.7% probability of $0\n- Contract C: Certain payment of $1,000\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
     "correct_answer": "Contract B",
-    "safe_option_label": "Contract A",
+    "safe_option_label": "Contract C",
     "risky_option_label": "Contract B",
-    "safe_first": true,
+    "distractor_option_label": "Contract A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "risky",
-    "level": 1
+    "ev_ratio_level": 1
   },
   {
-    "question_id": "46",
-    "template_type": "business",
-    "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.493,
-      "win_payoff": 24970,
-      "lose_payoff": 0,
-      "ev_ratio": 1.231,
-      "ev_safe": 10000,
-      "ev_risky": 12310.21
-    },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $10,000\n- Contract B: 49.3% probability of $24,970 payment, 50.7% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract B",
-    "safe_option_label": "Contract A",
-    "risky_option_label": "Contract B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 1
-  },
-  {
-    "question_id": "47",
-    "template_type": "abstract",
+    "question_id": "42",
+    "template_type": "explicit_ev",
     "parameters": {
       "safe_payoff": 5000,
-      "probability": 0.698,
-      "win_payoff": 7586,
+      "probability": 0.351,
+      "win_payoff": 17550,
       "lose_payoff": 0,
-      "ev_ratio": 1.059,
-      "ev_safe": 5000,
-      "ev_risky": 5295.03
+      "ev_ratio": 1.232,
+      "ev_risky": 6160.05,
+      "distractor_payoff": 4000
     },
-    "question_text": "You must choose exactly one option:\n- Option A: 69.8% chance of $7,586, 30.2% chance of $0\n- Option B: Receive $5,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
+    "question_text": "Consider these two options:\n- Option A: 35.1% chance of $17,550, 64.9% chance of $0\n- Option B: $4,000 with 100% certainty\n- Option C: $5,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option A",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option A",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 1
+  },
+  {
+    "question_id": "43",
+    "template_type": "grant",
+    "parameters": {
+      "safe_payoff": 1000,
+      "probability": 0.226,
+      "win_payoff": 4942,
+      "lose_payoff": 0,
+      "ev_ratio": 1.117,
+      "ev_risky": 1116.89,
+      "distractor_payoff": 800
+    },
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $800\n- Source B: 22.6% chance of receiving $4,942, 77.4% chance of receiving $0\n- Source C: Guaranteed funding of $1,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source B",
+    "safe_option_label": "Source C",
+    "risky_option_label": "Source B",
+    "distractor_option_label": "Source A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 1
+  },
+  {
+    "question_id": "44",
+    "template_type": "investment",
+    "parameters": {
+      "safe_payoff": 5000,
+      "probability": 0.531,
+      "win_payoff": 10697,
+      "lose_payoff": 0,
+      "ev_ratio": 1.136,
+      "ev_risky": 5680.11,
+      "distractor_payoff": 4000
+    },
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 53.1% chance of returning $10,697, 46.9% chance of returning $0\n- Investment B: Guaranteed return of $4,000\n- Investment C: Guaranteed return of $5,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment A",
+    "safe_option_label": "Investment C",
+    "risky_option_label": "Investment A",
+    "distractor_option_label": "Investment B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 1
+  },
+  {
+    "question_id": "45",
+    "template_type": "abstract",
+    "parameters": {
+      "safe_payoff": 500,
+      "probability": 0.527,
+      "win_payoff": 1155,
+      "lose_payoff": 0,
+      "ev_ratio": 1.217,
+      "ev_risky": 608.69,
+      "distractor_payoff": 400
+    },
+    "question_text": "You must choose exactly one option:\n- Option A: 52.7% chance of $1,155, 47.3% chance of $0\n- Option B: Receive $500 with certainty\n- Option C: Receive $400 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
     "correct_answer": "Option A",
     "safe_option_label": "Option B",
     "risky_option_label": "Option A",
-    "safe_first": false,
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "risky",
+      "safe",
+      "distractor"
+    ],
     "correct_choice": "risky",
-    "level": 1
+    "ev_ratio_level": 1
   },
   {
-    "question_id": "48",
-    "template_type": "investment",
-    "parameters": {
-      "safe_payoff": 1000,
-      "probability": 0.297,
-      "win_payoff": 3832,
-      "lose_payoff": 0,
-      "ev_ratio": 1.138,
-      "ev_safe": 1000,
-      "ev_risky": 1138.1
-    },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 29.7% chance of returning $3,832, 70.3% chance of returning $0\n- Investment B: Guaranteed return of $1,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment A",
-    "safe_option_label": "Investment B",
-    "risky_option_label": "Investment A",
-    "safe_first": false,
-    "correct_choice": "risky",
-    "level": 1
-  },
-  {
-    "question_id": "49",
-    "template_type": "explicit_ev",
-    "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.267,
-      "win_payoff": 464,
-      "lose_payoff": 0,
-      "ev_ratio": 1.239,
-      "ev_safe": 100,
-      "ev_risky": 123.89
-    },
-    "question_text": "Consider these two options:\n- Option A: $100 with 100% certainty\n- Option B: 26.7% chance of $464, 73.3% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 1
-  },
-  {
-    "question_id": "50",
-    "template_type": "explicit_ev",
-    "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.701,
-      "win_payoff": 166,
-      "lose_payoff": 0,
-      "ev_ratio": 1.167,
-      "ev_safe": 100,
-      "ev_risky": 116.37
-    },
-    "question_text": "Consider these two options:\n- Option A: $100 with 100% certainty\n- Option B: 70.1% chance of $166, 29.9% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 1
-  },
-  {
-    "question_id": "51",
+    "question_id": "46",
     "template_type": "grant",
     "parameters": {
       "safe_payoff": 500,
       "probability": 0.225,
-      "win_payoff": 3224,
+      "win_payoff": 2496,
       "lose_payoff": 0,
-      "ev_ratio": 1.451,
-      "ev_safe": 500,
-      "ev_risky": 725.4
+      "ev_ratio": 1.123,
+      "ev_risky": 561.6,
+      "distractor_payoff": 400
     },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $500\n- Source B: 22.5% chance of receiving $3,224, 77.5% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $400\n- Source B: 22.5% chance of receiving $2,496, 77.5% chance of receiving $0\n- Source C: Guaranteed funding of $500\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
     "correct_answer": "Source B",
-    "safe_option_label": "Source A",
+    "safe_option_label": "Source C",
     "risky_option_label": "Source B",
-    "safe_first": true,
+    "distractor_option_label": "Source A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "risky",
-    "level": 2
+    "ev_ratio_level": 1
   },
   {
-    "question_id": "52",
-    "template_type": "business",
-    "parameters": {
-      "safe_payoff": 500,
-      "probability": 0.609,
-      "win_payoff": 1328,
-      "lose_payoff": 0,
-      "ev_ratio": 1.617,
-      "ev_safe": 500,
-      "ev_risky": 808.75
-    },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: 60.9% probability of $1,328 payment, 39.1% probability of $0\n- Contract B: Certain payment of $500\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract B",
-    "risky_option_label": "Contract A",
-    "safe_first": false,
-    "correct_choice": "risky",
-    "level": 2
-  },
-  {
-    "question_id": "53",
-    "template_type": "explicit_ev",
-    "parameters": {
-      "safe_payoff": 5000,
-      "probability": 0.784,
-      "win_payoff": 10599,
-      "lose_payoff": 0,
-      "ev_ratio": 1.662,
-      "ev_safe": 5000,
-      "ev_risky": 8309.62
-    },
-    "question_text": "Consider these two options:\n- Option A: $5,000 with 100% certainty\n- Option B: 78.4% chance of $10,599, 21.6% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 2
-  },
-  {
-    "question_id": "54",
+    "question_id": "47",
     "template_type": "investment",
     "parameters": {
       "safe_payoff": 500,
-      "probability": 0.729,
-      "win_payoff": 867,
+      "probability": 0.6,
+      "win_payoff": 934,
       "lose_payoff": 0,
-      "ev_ratio": 1.264,
-      "ev_safe": 500,
-      "ev_risky": 632.04
+      "ev_ratio": 1.121,
+      "ev_risky": 560.4,
+      "distractor_payoff": 400
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 72.9% chance of returning $867, 27.1% chance of returning $0\n- Investment B: Guaranteed return of $500\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Investment A",
-    "safe_option_label": "Investment B",
-    "risky_option_label": "Investment A",
-    "safe_first": false,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $500\n- Investment B: 60% chance of returning $934, 40% chance of returning $0\n- Investment C: Guaranteed return of $400\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment B",
+    "safe_option_label": "Investment A",
+    "risky_option_label": "Investment B",
+    "distractor_option_label": "Investment C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
     "correct_choice": "risky",
-    "level": 2
+    "ev_ratio_level": 1
   },
   {
-    "question_id": "55",
-    "template_type": "grant",
+    "question_id": "48",
+    "template_type": "explicit_ev",
     "parameters": {
       "safe_payoff": 500,
-      "probability": 0.36,
-      "win_payoff": 2338,
+      "probability": 0.755,
+      "win_payoff": 726,
       "lose_payoff": 0,
-      "ev_ratio": 1.683,
-      "ev_safe": 500,
-      "ev_risky": 841.68
+      "ev_ratio": 1.097,
+      "ev_risky": 548.13,
+      "distractor_payoff": 400
     },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $500\n- Source B: 36% chance of receiving $2,338, 64% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source B",
-    "safe_option_label": "Source A",
-    "risky_option_label": "Source B",
-    "safe_first": true,
+    "question_text": "Consider these two options:\n- Option A: 75.5% chance of $726, 24.5% chance of $0\n- Option B: $400 with 100% certainty\n- Option C: $500 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option A",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option A",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
     "correct_choice": "risky",
-    "level": 2
+    "ev_ratio_level": 1
   },
   {
-    "question_id": "56",
+    "question_id": "49",
     "template_type": "grant",
     "parameters": {
       "safe_payoff": 100,
-      "probability": 0.715,
-      "win_payoff": 192,
+      "probability": 0.308,
+      "win_payoff": 401,
       "lose_payoff": 0,
-      "ev_ratio": 1.372,
-      "ev_safe": 100,
-      "ev_risky": 137.28
+      "ev_ratio": 1.235,
+      "ev_risky": 123.51,
+      "distractor_payoff": 80
     },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 71.5% chance of receiving $192, 28.5% chance of receiving $0\n- Source B: Guaranteed funding of $100\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source A",
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $80\n- Source B: Guaranteed funding of $100\n- Source C: 30.8% chance of receiving $401, 69.2% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source C",
     "safe_option_label": "Source B",
-    "risky_option_label": "Source A",
-    "safe_first": false,
+    "risky_option_label": "Source C",
+    "distractor_option_label": "Source A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
     "correct_choice": "risky",
-    "level": 2
+    "ev_ratio_level": 1
   },
   {
-    "question_id": "57",
+    "question_id": "50",
     "template_type": "business",
     "parameters": {
-      "safe_payoff": 1000,
-      "probability": 0.692,
-      "win_payoff": 2499,
+      "safe_payoff": 500,
+      "probability": 0.672,
+      "win_payoff": 798,
       "lose_payoff": 0,
-      "ev_ratio": 1.729,
-      "ev_safe": 1000,
-      "ev_risky": 1729.31
+      "ev_ratio": 1.072,
+      "ev_risky": 536.26,
+      "distractor_payoff": 400
     },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $1,000\n- Contract B: 69.2% probability of $2,499 payment, 30.8% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $400\n- Contract B: 67.2% probability of $798 payment, 32.8% probability of $0\n- Contract C: Certain payment of $500\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
     "correct_answer": "Contract B",
-    "safe_option_label": "Contract A",
+    "safe_option_label": "Contract C",
     "risky_option_label": "Contract B",
-    "safe_first": true,
+    "distractor_option_label": "Contract A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "risky",
-    "level": 2
+    "ev_ratio_level": 1
   },
   {
-    "question_id": "58",
-    "template_type": "abstract",
+    "question_id": "51",
+    "template_type": "investment",
     "parameters": {
       "safe_payoff": 500,
-      "probability": 0.439,
-      "win_payoff": 1598,
+      "probability": 0.69,
+      "win_payoff": 989,
       "lose_payoff": 0,
-      "ev_ratio": 1.403,
-      "ev_safe": 500,
-      "ev_risky": 701.52
+      "ev_ratio": 1.365,
+      "ev_risky": 682.41,
+      "distractor_payoff": 400
     },
-    "question_text": "You must choose exactly one option:\n- Option A: Receive $500 with certainty\n- Option B: 43.9% chance of $1,598, 56.1% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option B",
-    "safe_option_label": "Option A",
-    "risky_option_label": "Option B",
-    "safe_first": true,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $400\n- Investment B: Guaranteed return of $500\n- Investment C: 69% chance of returning $989, 31.0% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment C",
+    "safe_option_label": "Investment B",
+    "risky_option_label": "Investment C",
+    "distractor_option_label": "Investment A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
     "correct_choice": "risky",
-    "level": 2
+    "ev_ratio_level": 2
   },
   {
-    "question_id": "59",
+    "question_id": "52",
+    "template_type": "investment",
+    "parameters": {
+      "safe_payoff": 100,
+      "probability": 0.596,
+      "win_payoff": 227,
+      "lose_payoff": 0,
+      "ev_ratio": 1.35,
+      "ev_risky": 135.29,
+      "distractor_payoff": 80
+    },
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $80\n- Investment B: Guaranteed return of $100\n- Investment C: 59.6% chance of returning $227, 40.4% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment C",
+    "safe_option_label": "Investment B",
+    "risky_option_label": "Investment C",
+    "distractor_option_label": "Investment A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 2
+  },
+  {
+    "question_id": "53",
     "template_type": "business",
     "parameters": {
       "safe_payoff": 1000,
       "probability": 0.585,
-      "win_payoff": 2513,
+      "win_payoff": 2308,
       "lose_payoff": 0,
-      "ev_ratio": 1.47,
-      "ev_safe": 1000,
-      "ev_risky": 1470.11
+      "ev_ratio": 1.35,
+      "ev_risky": 1350.18,
+      "distractor_payoff": 800
     },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: 58.5% probability of $2,513 payment, 41.5% probability of $0\n- Contract B: Certain payment of $1,000\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract B",
-    "risky_option_label": "Contract A",
-    "safe_first": false,
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $1,000\n- Contract B: 58.5% probability of $2,308 payment, 41.5% probability of $0\n- Contract C: Certain payment of $800\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract B",
+    "safe_option_label": "Contract A",
+    "risky_option_label": "Contract B",
+    "distractor_option_label": "Contract C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
     "correct_choice": "risky",
-    "level": 2
+    "ev_ratio_level": 2
   },
   {
-    "question_id": "60",
+    "question_id": "54",
     "template_type": "abstract",
     "parameters": {
       "safe_payoff": 100,
       "probability": 0.726,
-      "win_payoff": 192,
+      "win_payoff": 181,
       "lose_payoff": 0,
-      "ev_ratio": 1.394,
-      "ev_safe": 100,
-      "ev_risky": 139.39
+      "ev_ratio": 1.315,
+      "ev_risky": 131.41,
+      "distractor_payoff": 80
     },
-    "question_text": "You must choose exactly one option:\n- Option A: 72.6% chance of $192, 27.4% chance of $0\n- Option B: Receive $100 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
+    "question_text": "You must choose exactly one option:\n- Option A: Receive $100 with certainty\n- Option B: 72.6% chance of $181, 27.4% chance of $0\n- Option C: Receive $80 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option B",
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
     "correct_choice": "risky",
-    "level": 2
+    "ev_ratio_level": 2
   },
   {
-    "question_id": "61",
+    "question_id": "55",
     "template_type": "abstract",
     "parameters": {
       "safe_payoff": 100,
       "probability": 0.558,
-      "win_payoff": 347,
+      "win_payoff": 239,
       "lose_payoff": 0,
-      "ev_ratio": 1.938,
-      "ev_safe": 100,
-      "ev_risky": 193.63
+      "ev_ratio": 1.336,
+      "ev_risky": 133.36,
+      "distractor_payoff": 80
     },
-    "question_text": "You must choose exactly one option:\n- Option A: 55.8% chance of $347, 44.2% chance of $0\n- Option B: Receive $100 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
+    "question_text": "You must choose exactly one option:\n- Option A: Receive $100 with certainty\n- Option B: Receive $80 with certainty\n- Option C: 55.8% chance of $239, 44.2% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option C",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 2
+  },
+  {
+    "question_id": "56",
+    "template_type": "explicit_ev",
+    "parameters": {
+      "safe_payoff": 10000,
+      "probability": 0.269,
+      "win_payoff": 54833,
+      "lose_payoff": 0,
+      "ev_ratio": 1.475,
+      "ev_risky": 14750.08,
+      "distractor_payoff": 8000
+    },
+    "question_text": "Consider these two options:\n- Option A: $8,000 with 100% certainty\n- Option B: 26.9% chance of $54,833, 73.1% chance of $0\n- Option C: $10,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option B",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 2
+  },
+  {
+    "question_id": "57",
+    "template_type": "abstract",
+    "parameters": {
+      "safe_payoff": 5000,
+      "probability": 0.201,
+      "win_payoff": 36841,
+      "lose_payoff": 0,
+      "ev_ratio": 1.481,
+      "ev_risky": 7405.04,
+      "distractor_payoff": 4000
+    },
+    "question_text": "You must choose exactly one option:\n- Option A: 20.1% chance of $36,841, 79.9% chance of $0\n- Option B: Receive $5,000 with certainty\n- Option C: Receive $4,000 with certainty\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
     "correct_answer": "Option A",
     "safe_option_label": "Option B",
     "risky_option_label": "Option A",
-    "safe_first": false,
+    "distractor_option_label": "Option C",
+    "option_order": [
+      "risky",
+      "safe",
+      "distractor"
+    ],
     "correct_choice": "risky",
-    "level": 3
+    "ev_ratio_level": 2
   },
   {
-    "question_id": "62",
-    "template_type": "grant",
-    "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.791,
-      "win_payoff": 23338,
-      "lose_payoff": 0,
-      "ev_ratio": 1.846,
-      "ev_safe": 10000,
-      "ev_risky": 18460.36
-    },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $10,000\n- Source B: 79.1% chance of receiving $23,338, 20.9% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source B",
-    "safe_option_label": "Source A",
-    "risky_option_label": "Source B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 3
-  },
-  {
-    "question_id": "63",
-    "template_type": "business",
-    "parameters": {
-      "safe_payoff": 100,
-      "probability": 0.625,
-      "win_payoff": 288,
-      "lose_payoff": 0,
-      "ev_ratio": 1.801,
-      "ev_safe": 100,
-      "ev_risky": 180.0
-    },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $100\n- Contract B: 62.5% probability of $288 payment, 37.5% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract B",
-    "safe_option_label": "Contract A",
-    "risky_option_label": "Contract B",
-    "safe_first": true,
-    "correct_choice": "risky",
-    "level": 3
-  },
-  {
-    "question_id": "64",
+    "question_id": "58",
     "template_type": "business",
     "parameters": {
       "safe_payoff": 5000,
       "probability": 0.242,
-      "win_payoff": 42686,
+      "win_payoff": 29256,
       "lose_payoff": 0,
-      "ev_ratio": 2.066,
-      "ev_safe": 5000,
-      "ev_risky": 10330.01
+      "ev_ratio": 1.416,
+      "ev_risky": 7079.95,
+      "distractor_payoff": 4000
     },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: 24.2% probability of $42,686 payment, 75.8% probability of $0\n- Contract B: Certain payment of $5,000\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract B",
-    "risky_option_label": "Contract A",
-    "safe_first": false,
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $5,000\n- Contract B: Certain payment of $4,000\n- Contract C: 24.2% probability of $29,256 payment, 75.8% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract C",
+    "safe_option_label": "Contract A",
+    "risky_option_label": "Contract C",
+    "distractor_option_label": "Contract B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
     "correct_choice": "risky",
-    "level": 3
+    "ev_ratio_level": 2
+  },
+  {
+    "question_id": "59",
+    "template_type": "abstract",
+    "parameters": {
+      "safe_payoff": 1000,
+      "probability": 0.504,
+      "win_payoff": 2812,
+      "lose_payoff": 0,
+      "ev_ratio": 1.417,
+      "ev_risky": 1417.25,
+      "distractor_payoff": 800
+    },
+    "question_text": "You must choose exactly one option:\n- Option A: Receive $1,000 with certainty\n- Option B: Receive $800 with certainty\n- Option C: 50.4% chance of $2,812, 49.6% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option A",
+    "risky_option_label": "Option C",
+    "distractor_option_label": "Option B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 2
+  },
+  {
+    "question_id": "60",
+    "template_type": "business",
+    "parameters": {
+      "safe_payoff": 10000,
+      "probability": 0.276,
+      "win_payoff": 49094,
+      "lose_payoff": 0,
+      "ev_ratio": 1.355,
+      "ev_risky": 13549.94,
+      "distractor_payoff": 8000
+    },
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $8,000\n- Contract B: Certain payment of $10,000\n- Contract C: 27.6% probability of $49,094 payment, 72.4% probability of $0\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract C",
+    "safe_option_label": "Contract B",
+    "risky_option_label": "Contract C",
+    "distractor_option_label": "Contract A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 2
+  },
+  {
+    "question_id": "61",
+    "template_type": "explicit_ev",
+    "parameters": {
+      "safe_payoff": 10000,
+      "probability": 0.381,
+      "win_payoff": 46562,
+      "lose_payoff": 0,
+      "ev_ratio": 1.774,
+      "ev_risky": 17740.12,
+      "distractor_payoff": 8000
+    },
+    "question_text": "Consider these two options:\n- Option A: $8,000 with 100% certainty\n- Option B: 38.1% chance of $46,562, 61.9% chance of $0\n- Option C: $10,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option B",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 3
+  },
+  {
+    "question_id": "62",
+    "template_type": "business",
+    "parameters": {
+      "safe_payoff": 500,
+      "probability": 0.458,
+      "win_payoff": 1954,
+      "lose_payoff": 0,
+      "ev_ratio": 1.79,
+      "ev_risky": 894.93,
+      "distractor_payoff": 400
+    },
+    "question_text": "Your company must choose between two contracts:\n- Contract A: Certain payment of $500\n- Contract B: 45.8% probability of $1,954 payment, 54.2% probability of $0\n- Contract C: Certain payment of $400\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\", \"Contract B\", or \"Contract C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Contract B",
+    "safe_option_label": "Contract A",
+    "risky_option_label": "Contract B",
+    "distractor_option_label": "Contract C",
+    "option_order": [
+      "safe",
+      "risky",
+      "distractor"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 3
+  },
+  {
+    "question_id": "63",
+    "template_type": "grant",
+    "parameters": {
+      "safe_payoff": 5000,
+      "probability": 0.465,
+      "win_payoff": 17280,
+      "lose_payoff": 0,
+      "ev_ratio": 1.607,
+      "ev_risky": 8035.2,
+      "distractor_payoff": 4000
+    },
+    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: Guaranteed funding of $4,000\n- Source B: Guaranteed funding of $5,000\n- Source C: 46.5% chance of receiving $17,280, 53.5% chance of receiving $0\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\", \"Source B\", or \"Source C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Source C",
+    "safe_option_label": "Source B",
+    "risky_option_label": "Source C",
+    "distractor_option_label": "Source A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 3
+  },
+  {
+    "question_id": "64",
+    "template_type": "abstract",
+    "parameters": {
+      "safe_payoff": 1000,
+      "probability": 0.509,
+      "win_payoff": 3568,
+      "lose_payoff": 0,
+      "ev_ratio": 1.816,
+      "ev_risky": 1816.11,
+      "distractor_payoff": 800
+    },
+    "question_text": "You must choose exactly one option:\n- Option A: Receive $800 with certainty\n- Option B: Receive $1,000 with certainty\n- Option C: 50.9% chance of $3,568, 49.1% chance of $0\n\nWhich option do you choose? Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
+    "safe_option_label": "Option B",
+    "risky_option_label": "Option C",
+    "distractor_option_label": "Option A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
+    "correct_choice": "risky",
+    "ev_ratio_level": 3
   },
   {
     "question_id": "65",
-    "template_type": "explicit_ev",
+    "template_type": "investment",
     "parameters": {
       "safe_payoff": 1000,
-      "probability": 0.598,
-      "win_payoff": 3094,
+      "probability": 0.335,
+      "win_payoff": 4776,
       "lose_payoff": 0,
-      "ev_ratio": 1.85,
-      "ev_safe": 1000,
-      "ev_risky": 1850.21
+      "ev_ratio": 1.6,
+      "ev_risky": 1599.96,
+      "distractor_payoff": 800
     },
-    "question_text": "Consider these two options:\n- Option A: 59.8% chance of $3,094, 40.2% chance of $0\n- Option B: $1,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: 33.5% chance of returning $4,776, 66.5% chance of returning $0\n- Investment B: Guaranteed return of $800\n- Investment C: Guaranteed return of $1,000\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment A",
+    "safe_option_label": "Investment C",
+    "risky_option_label": "Investment A",
+    "distractor_option_label": "Investment B",
+    "option_order": [
+      "risky",
+      "distractor",
+      "safe"
+    ],
     "correct_choice": "risky",
-    "level": 3
+    "ev_ratio_level": 3
   },
   {
     "question_id": "66",
-    "template_type": "explicit_ev",
+    "template_type": "investment",
     "parameters": {
-      "safe_payoff": 1000,
-      "probability": 0.6,
-      "win_payoff": 3217,
+      "safe_payoff": 5000,
+      "probability": 0.567,
+      "win_payoff": 16614,
       "lose_payoff": 0,
-      "ev_ratio": 1.93,
-      "ev_safe": 1000,
-      "ev_risky": 1930.2
+      "ev_ratio": 1.884,
+      "ev_risky": 9420.14,
+      "distractor_payoff": 4000
     },
-    "question_text": "Consider these two options:\n- Option A: 60% chance of $3,217, 40% chance of $0\n- Option B: $1,000 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
-    "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $5,000\n- Investment B: Guaranteed return of $4,000\n- Investment C: 56.7% chance of returning $16,614, 43.3% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment C",
+    "safe_option_label": "Investment A",
+    "risky_option_label": "Investment C",
+    "distractor_option_label": "Investment B",
+    "option_order": [
+      "safe",
+      "distractor",
+      "risky"
+    ],
     "correct_choice": "risky",
-    "level": 3
+    "ev_ratio_level": 3
   },
   {
     "question_id": "67",
     "template_type": "explicit_ev",
     "parameters": {
       "safe_payoff": 500,
-      "probability": 0.315,
-      "win_payoff": 3279,
+      "probability": 0.631,
+      "win_payoff": 1341,
       "lose_payoff": 0,
-      "ev_ratio": 2.066,
-      "ev_safe": 500,
-      "ev_risky": 1032.88
+      "ev_ratio": 1.692,
+      "ev_risky": 846.17,
+      "distractor_payoff": 400
     },
-    "question_text": "Consider these two options:\n- Option A: 31.5% chance of $3,279, 68.5% chance of $0\n- Option B: $500 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\" or \"Option B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Option A",
+    "question_text": "Consider these two options:\n- Option A: $400 with 100% certainty\n- Option B: $500 with 100% certainty\n- Option C: 63.1% chance of $1,341, 36.9% chance of $0\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option C",
     "safe_option_label": "Option B",
-    "risky_option_label": "Option A",
-    "safe_first": false,
+    "risky_option_label": "Option C",
+    "distractor_option_label": "Option A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
     "correct_choice": "risky",
-    "level": 3
+    "ev_ratio_level": 3
   },
   {
     "question_id": "68",
     "template_type": "investment",
     "parameters": {
-      "safe_payoff": 10000,
-      "probability": 0.541,
-      "win_payoff": 36266,
+      "safe_payoff": 100,
+      "probability": 0.736,
+      "win_payoff": 262,
       "lose_payoff": 0,
-      "ev_ratio": 1.962,
-      "ev_safe": 10000,
-      "ev_risky": 19619.91
+      "ev_ratio": 1.93,
+      "ev_risky": 192.83,
+      "distractor_payoff": 80
     },
-    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $10,000\n- Investment B: 54.1% chance of returning $36,266, 45.9% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\" or \"Investment B\". DO NOT include any explanation, reasoning, or additional text.",
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $80\n- Investment B: 73.6% chance of returning $262, 26.4% chance of returning $0\n- Investment C: Guaranteed return of $100\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
     "correct_answer": "Investment B",
-    "safe_option_label": "Investment A",
+    "safe_option_label": "Investment C",
     "risky_option_label": "Investment B",
-    "safe_first": true,
+    "distractor_option_label": "Investment A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "risky",
-    "level": 3
+    "ev_ratio_level": 3
   },
   {
     "question_id": "69",
-    "template_type": "business",
+    "template_type": "investment",
     "parameters": {
-      "safe_payoff": 1000,
-      "probability": 0.326,
-      "win_payoff": 6485,
+      "safe_payoff": 500,
+      "probability": 0.682,
+      "win_payoff": 1355,
       "lose_payoff": 0,
-      "ev_ratio": 2.114,
-      "ev_safe": 1000,
-      "ev_risky": 2114.11
+      "ev_ratio": 1.848,
+      "ev_risky": 924.11,
+      "distractor_payoff": 400
     },
-    "question_text": "Your company must choose between two contracts:\n- Contract A: 32.6% probability of $6,485 payment, 67.4% probability of $0\n- Contract B: Certain payment of $1,000\n\nAssuming the company should maximize expected value, which contract should it accept? Answer ONLY with \"Contract A\" or \"Contract B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Contract A",
-    "safe_option_label": "Contract B",
-    "risky_option_label": "Contract A",
-    "safe_first": false,
+    "question_text": "A client asks for your recommendation between two investments:\n- Investment A: Guaranteed return of $400\n- Investment B: Guaranteed return of $500\n- Investment C: 68.2% chance of returning $1,355, 31.8% chance of returning $0\n\nBased purely on expected value, which investment should you recommend? Answer ONLY with \"Investment A\", \"Investment B\", or \"Investment C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Investment C",
+    "safe_option_label": "Investment B",
+    "risky_option_label": "Investment C",
+    "distractor_option_label": "Investment A",
+    "option_order": [
+      "distractor",
+      "safe",
+      "risky"
+    ],
     "correct_choice": "risky",
-    "level": 3
+    "ev_ratio_level": 3
   },
   {
     "question_id": "70",
-    "template_type": "grant",
+    "template_type": "explicit_ev",
     "parameters": {
-      "safe_payoff": 5000,
-      "probability": 0.465,
-      "win_payoff": 20269,
+      "safe_payoff": 500,
+      "probability": 0.75,
+      "win_payoff": 1041,
       "lose_payoff": 0,
-      "ev_ratio": 1.885,
-      "ev_safe": 5000,
-      "ev_risky": 9425.09
+      "ev_ratio": 1.561,
+      "ev_risky": 780.75,
+      "distractor_payoff": 400
     },
-    "question_text": "A researcher can apply to one of two funding sources:\n- Source A: 46.5% chance of receiving $20,269, 53.5% chance of receiving $0\n- Source B: Guaranteed funding of $5,000\n\nTo maximize expected funding, which source should they choose? Answer ONLY with \"Source A\" or \"Source B\". DO NOT include any explanation, reasoning, or additional text.",
-    "correct_answer": "Source A",
-    "safe_option_label": "Source B",
-    "risky_option_label": "Source A",
-    "safe_first": false,
+    "question_text": "Consider these two options:\n- Option A: $400 with 100% certainty\n- Option B: 75% chance of $1,041, 25% chance of $0\n- Option C: $500 with 100% certainty\n\nCalculate the expected value of each option and choose the one with higher expected value. Answer ONLY with \"Option A\", \"Option B\", or \"Option C\". DO NOT include any explanation, reasoning, or additional text.",
+    "correct_answer": "Option B",
+    "safe_option_label": "Option C",
+    "risky_option_label": "Option B",
+    "distractor_option_label": "Option A",
+    "option_order": [
+      "distractor",
+      "risky",
+      "safe"
+    ],
     "correct_choice": "risky",
-    "level": 3
+    "ev_ratio_level": 3
   }
 ]

@@ -111,9 +111,10 @@ def load_risk_aversion_dataset():
                 "parameters",
                 "safe_option_label",
                 "risky_option_label",
+                "distractor_option_label",  # NEW: label for distractor option
                 "correct_choice",
-                "safe_first",
-                "level"
+                "option_order",              # NEW: order of options as presented
+                "ev_ratio_level"
             ]
         )
     )
@@ -184,5 +185,5 @@ def risk_aversion(bias: BiasType = DEFAULT_BIAS_TYPE):
         dataset=load_risk_aversion_dataset(),
         solver=solver_steps,
         scorer=match(location="end"),
-        metrics=[grouped(accuracy(), "correct_choice"), stderr()]
+        metrics=[grouped(accuracy(), "ev_ratio_level"), stderr()]
     )
