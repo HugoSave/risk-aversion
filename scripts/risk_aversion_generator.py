@@ -152,7 +152,7 @@ class QuestionTemplates:
     """Templates for different question framings."""
 
     # Common answer instruction used across all templates
-    ANSWER_INSTRUCTION = 'Answer ONLY with "{label} A", "{label} B", or "{label} C". DO NOT include any explanation, reasoning, or additional text.'
+    ANSWER_INSTRUCTION = 'Answer ONLY with "{label} A", "{label} B", or "{label} C"' # . DO NOT include any explanation, reasoning, or additional text.' - this 'DO NOT' string has been shown to be probelmatic for the annotator judge.
 
     # Template configurations for each template type
     TEMPLATE_CONFIGS = {
