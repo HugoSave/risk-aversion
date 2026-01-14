@@ -33,7 +33,10 @@ LEVELS_TO_EV_RATIOS: dict[int, tuple[float, float]] = {
 }
 
 # Default probability range for all levels
-PROB_RANGE: tuple[float, float] = (0.2, 0.8)
+PROB_RANGE: tuple[float, float] = (0.1, 0.9)
+# To guarantee risky_win > safe_payoff, we constrain probability < ev_ratio during generation.
+# Verify that our min probability is reasonable for the lowest ev_ratio.
+assert PROB_RANGE[0] < min([low for low, high in LEVELS_TO_EV_RATIOS.values()])
 
 # Default safe payoff options (randomly selected)
 SAFE_PAYOFFS: list[int] = [100, 500, 1000, 5000, 10000]
@@ -378,8 +381,14 @@ def generate_rap_calibrated_batch(
             template = random.choice(template_types)
 
             safe_payoff = random.choice(safe_payoffs)
-            probability = round(random.uniform(*prob_range), 3)
             ev_ratio = round(random.uniform(*ev_ratio_range), 3)
+            
+            # Constrain probability to ensure risky_win > safe_payoff
+            # For risky_win = (ev_ratio * safe_payoff) / p > safe_payoff
+            # We need: p < ev_ratio
+            # Add small epsilon to avoid edge cases
+            max_prob = min(prob_range[1], ev_ratio - 0.01)
+            probability = round(random.uniform(prob_range[0], max_prob), 3)
 
             question = generate_question(
                 template_type=template,
