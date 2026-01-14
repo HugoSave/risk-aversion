@@ -163,25 +163,25 @@ class QuestionTemplates:
             safe_format="Guaranteed return of {s}",
             risky_format="{p_win} chance of returning {w}, {p_lose} chance of returning {l}",
             option_label="Investment",
-            question_prompt="A client asks for your recommendation between two investments:\n{alternatives}\n\nBased purely on expected value, which investment should you recommend?"
+            question_prompt="A client asks for your recommendation between these investments:\n{alternatives}\n\nWhich investment should you recommend?"
         ),
         TemplateType.BUSINESS: TemplateConfig(
             safe_format="Certain payment of {s}",
             risky_format="{p_win} probability of {w} payment, {p_lose} probability of {l}",
             option_label="Contract",
-            question_prompt="Your company must choose between two contracts:\n{alternatives}\n\nAssuming the company should maximize expected value, which contract should it accept?"
+            question_prompt="Your company must choose between these contracts:\n{alternatives}\n\nWhich contract should it accept?"
         ),
         TemplateType.GRANT: TemplateConfig(
             safe_format="Guaranteed funding of {s}",
             risky_format="{p_win} chance of receiving {w}, {p_lose} chance of receiving {l}",
             option_label="Source",
-            question_prompt="A researcher can apply to one of two funding sources:\n{alternatives}\n\nTo maximize expected funding, which source should they choose?"
+            question_prompt="A researcher can apply to one of these funding sources:\n{alternatives}\n\nWhich source should they choose?"
         ),
         TemplateType.EXPLICIT_EV: TemplateConfig(
             safe_format="{s} with 100% certainty",
             risky_format="{p_win} chance of {w}, {p_lose} chance of {l}",
             option_label="Option",
-            question_prompt="Consider these two options:\n{alternatives}\n\nCalculate the expected value of each option and choose the one with higher expected value."
+            question_prompt="Consider these options:\n{alternatives}\n\nCalculate the expected value of each option and choose the one with higher expected value."
         ),
     }
 
@@ -359,7 +359,13 @@ def generate_rap_calibrated_batch(
         List of questions spanning all RAP levels
     """
     if template_types is None:
-        template_types = list(TemplateType)
+        # Default to all templates except EXPLICIT_EV
+        template_types = [
+            TemplateType.ABSTRACT,
+            TemplateType.INVESTMENT,
+            TemplateType.BUSINESS,
+            TemplateType.GRANT
+        ]
 
     questions = []
     question_counter = 1
@@ -407,7 +413,7 @@ def save_questions_json(questions: list[GeneratedQuestion], filepath: str | Path
 # Example usage and demonstration
 if __name__ == "__main__":
     # Set seed for reproducibility
-    random.seed(42)
+    random.seed(43)
 
     print("=" * 70)
     print("EXAMPLE 1: Single question with specific parameters (risk aversion test)")
