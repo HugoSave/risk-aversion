@@ -368,7 +368,7 @@ def generate_rap_calibrated_batch(
         ]
 
     questions = []
-    question_counter = 1
+    question_counter = 0
 
     # Generate questions for each level in sorted order
     for level in sorted(levels_to_ev_ratios.keys()):
@@ -388,7 +388,7 @@ def generate_rap_calibrated_batch(
                 lose_payoff=0,
                 ev_ratio=ev_ratio,
                 randomize_order=randomize_order,
-                question_id=f"{question_counter}",
+                question_id=f"RiskAv_{question_counter}",
                 level=level
             )
             questions.append(question)
